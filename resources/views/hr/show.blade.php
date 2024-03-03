@@ -42,7 +42,7 @@
                                             name="sex"class="form-control " id="inputEmail3">
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label class="control-label mb-10" for="email">ኢሜይል (የ አ.ሳ.ቴን ኢሜይል ብቻ
+                                        <label class="control-label mb-10" for="email">ኢሜይል (የመደ ወላቡን ኢሜይል ብቻ
                                             ይጠቀሙ) *</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -194,28 +194,27 @@
 
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label for="servicPeriodAtUniversity">በዩኒቨርስቲዉ አገልግሎት ዘመን (በዓመት,የስራ
-                                            መደብ)</label>
+                                        <label for="servicPeriodAtUniversity">ጠቅላላ አገልግሎት ዘመን (በዓመት)</label>
                                         <input type="text" value="{{ $form->servicPeriodAtUniversity }}"
                                             name="servicPeriodAtUniversity"class="form-control "
                                             id="servicPeriodAtUniversity">
                                     </div>
 
-                                    <div class="col-md-6 form-group">
+                                    {{-- <div class="col-md-6 form-group">
                                         <label for="servicPeriodAtAnotherPlace">በሌላ መስርያ ቤት አገልግሎት ዘመን(በዓመት,የስራ
                                             መደብ)</label>
                                         <input type="text" value="{{ $form->servicPeriodAtAnotherPlace }}"
                                             name="servicPeriodAtAnotherPlace"class="form-control "
                                             id="servicPeriodAtAnotherPlace">
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-6 form-group">
-                                        <label for="serviceBeforeDiplo"> አገልግሎት ከዲፕሎማ በፊት(በዓመት,የስራ መደብ)</label>
+                                        <label for="serviceBeforeDiplo"> አገልግሎት ከዲፕሎማ በፊት(በዓመት)</label>
                                         <input type="text" value="{{ $form->serviceBeforeDiplo }}"
                                             name="serviceBeforeDiplo"class="form-control " id="serviceBeforeDiplo">
 
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label for="serviceAfterDiplo"> አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ(በዓመት, የስራ መደብ)</label>
+                                        <label for="serviceAfterDiplo"> አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ(በዓመት)</label>
                                         <input type="text" value="{{ $form->serviceAfterDiplo }}"
                                             name="serviceAfterDiplo"class="form-control " id="serviceAfterDiplo">
                                     </div>
@@ -226,17 +225,27 @@
                                         <input type="text" value="{{ $form->resultOfrecentPerform }}"
                                             name="resultOfrecentPerform"class="form-control " id="resultOfrecentPerform">
                                     </div>
-
+                                    <div class="col-md-6 form-group">
+                                        <label for="employee_situation"> ሰራተኛው ያለበት ሁኔታ </label>
+                                        <input type="text" value="{{ $form->employee_situation }}"
+                                            name="employee_situation"class="form-control " id="employee_situation">
+                                    </div>
                                     <div class="col-md-6 form-group">
                                         <label for="DisciplineFlaw">የዲሲፕሊን ጉድለት</label>
                                         <input type="text" value="{{ $form->DisciplineFlaw }}"
                                             name="DisciplineFlaw"class="form-control " id="DisciplineFlaw">
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label for="employee_situation"> ሰራተኛው  ያለበት ሁኔታ </label>
-                                        <input type="text" value="{{ $form->employee_situation }}"
-                                            name="employee_situation"class="form-control " id="employee_situation">
+                                        <label for="DisciplineFlawDate">ቀን (የዲስፕሊን ጉድለት ካለ )</label>
+                                        <input type="text" value="{{ $form->DisciplineFlawDate }}"
+                                            name="DisciplineFlawDate"class="form-control " id="DisciplineFlawDate">
                                     </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="employer_support">የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</label>
+                                        <input type="text" value="{{ $form->employer_support }}"
+                                            name="employer_support"class="form-control " id="employer_support">
+                                    </div>
+
                                 </div>
 
                                 @foreach ($form->moreroles ?? [] as $i => $fo)
@@ -290,57 +299,7 @@
 
 
                                 </div>
-                                @foreach ($form->employer_supports ?? [] as $i => $fo)
-                                    <div class="row ">
-                                        <input type="hidden" value="{{ $fo->id }} "
-                                            name="addMoreInputEmployee[{{ $i }}][id]"class="form-control "
-                                            id="inputEmail3">
-                                        <div class="col-md-4 form-group">
-                                            <label for="employer_support">የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</label>
-                                            <input type="text" value="{{ $fo->employer_support }}"
-                                                name="addMoreInputEmployee[{{ $i }}][employer_support]"class="form-control "
-                                                id="inputEmail3">
-                                            @error('employer_support')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
 
-                                        </div>
-
-                                    </div>
-                                @endforeach
-                                <div id="myformEmployee">
-                                    <div class="row">
-                                        <div class="col-sm">
-
-                                            <div class=" formEmployee row">
-
-                                                <div class="col-md-6">
-
-                                                    <label for="employer_support">የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</label>
-                                                    <input type="text" name="addEmployeeFields[0][employer_support]"
-                                                        value="{{ old('employer_support') }}"
-                                                        class="form-control  @error('employer_support') is-invalid @enderror"
-                                                        id="employer_support" placeholder="የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት">
-                                                    @error('employer_support')
-                                                        <span class=" error invalid-feedback">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-
-                                                </div>
-
-                                                <div>
-                                                    <a href="javascript:void(0)"
-                                                        class="btn color-wrap text-white bg-blue-dark-4  addRowEmployee mt-40 "
-                                                        style=" border-radius:50%">+</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
                                 <h3 class="text-white text-center mt-3 mb-4   "
                                     style=" background-color:rgb(17,40,77); margin:center nav">የስራ ልምድ(በኢትዮጵያ አቆጣጠር
                                     ብቻ)</h3>

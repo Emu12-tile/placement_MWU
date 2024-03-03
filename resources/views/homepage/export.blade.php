@@ -68,7 +68,8 @@
         <h1 style="font-family: Noto Sans Ethiopic, sans-serif; text-align:center ">መደ ወላቡ ዩኒቨርሲቲ </h1>
         <h3 style="text-align:center">የአስተዳደር ሠራተኞች ፕሮፋይል</h3>
         <p>1/ የሠራተኛው ሙሉ ስም:-{{ $form->firstName }} {{ $form->middleName }} {{ $form->lastName }} </p>
-        <p>2/ አሁን ያሉበት የስራ ክፍል፦{{ $form->jobcat }} &emsp; አሁን ያሉበት የስራ መደብ መጠርያ:-{{ $form->positionofnow }} &emsp; ደረጃ:-{{ $form->level }}</p>
+        <p>2/ አሁን ያሉበት የስራ ክፍል፦{{ $form->jobcat }} &emsp; አሁን ያሉበት የስራ መደብ መጠርያ:-{{ $form->positionofnow }} &emsp;
+            ደረጃ:-{{ $form->level }}</p>
         <p>3/ ብሔር:-{{ $form->ethinicity }} &emsp; የትውልድ ዘመን:-{{ $form->birth_date }}
         </p>
         <p>4/ የተማሩት የት/ት ዝግጅትና የት/ት ደረጃ:-
@@ -99,9 +100,9 @@
             {{ $form->UniversityHiringEra }}
 
         </p>
-        <p>6/ በዩኒቨርስቲዉ አገልግሎት ዘመን:-{{ $form->servicPeriodAtUniversity }} </p>
-        <p>7/ በሌላ መስርያ ቤት አገልግሎት ዘመን:-{{ $form->servicPeriodAtAnotherPlace }} </p>
-        <h5>8/ የሚወዳደሩበት የስራ ክፍልና የስራ መደብ</h5>
+        <p>6/ ጠቅላላ አገልግሎት ዘመን (በዓመት):-{{ $form->servicPeriodAtUniversity }} </p>
+        {{-- <p>7/ በሌላ መስርያ ቤት አገልግሎት ዘመን:-{{ $form->servicPeriodAtAnotherPlace }} </p> --}}
+        {{-- <h5>8/ የሚወዳደሩበት የስራ ክፍልና የስራ መደብ</h5>
         <p> ምርጫ 1</p>
 
         <p> የስራ ክፍል :-{{ $form->job_category->job_category ?? '' }}</p>
@@ -109,9 +110,9 @@
         <p>
             ምርጫ 2</p>
         <p> የስራ ክፍል:- {{ $form->jobcat2->job_category ?? '' }} </p>
-        <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p>
-        <div class="html2pdf__page-break"></div>
-        <p>9/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
+        <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p> --}}
+        {{-- <div class="html2pdf__page-break"></div> --}}
+        <p>7/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
 
         <table id="customers">
             <thead>
@@ -207,22 +208,24 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="html2pdf__page-break"></div>
-        <p>10/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
+        {{-- <div class="html2pdf__page-break"></div> --}}
+        <p>8/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
             {{ $form->serviceAfterDiplo }}</p>
-        <p>11/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
-        <p>12/ የዲስፕሊን ጉድለት:-{{ $form->DisciplineFlaw }}</p>
-        <p>13/ የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት:-@foreach ($employer_support as $i => $fo)
-            {{$fo->employer_support ??''}},
-        @endforeach</p>
-         <p>14/ ሰራተኛው ያለበት ሁኔታ:-{{ $form->employee_situation }}</p>
-        <p>15/ ተጨማሪ የሥራ ድርሻ:-@foreach ($morerole as $i => $fo)
-            {{$fo->more_role ??''}},
-        @endforeach</p>
-        <p>ቅጹን የሞላው ሰራተኛ ስም
-            &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+        <p>9/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
+        <p>10/ የዲስፕሊን ጉድለት:-{{ $form->DisciplineFlaw }} {{ $form->DisciplineFlawDate }}</p>
+        <p>11/ የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት:-
+            {{ $form->employer_support }}
+        </p>
+        <p>12/ ሰራተኛው ያለበት ሁኔታ:-{{ $form->employee_situation }}</p>
+        <p>13/ ተጨማሪ የሥራ ድርሻ:-@foreach ($morerole as $i => $fo)
+                {{ $fo->more_role ?? '' }},
+            @endforeach
+        </p>
+        <p>ቅጹን የሞላው የሰዉ ሀብት ባለሙያ {{ Auth()->user()->name }}
             ፊርማ&mdash;&mdash;&mdash;&mdash; ቀን&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
-        <p>ስለትክክለኛነቱ ያረጋገጠው የሰዉ ሀብት ባለሙያ ፊርማ&mdash;&mdash;&mdash;&mdash;&mdash;
+        <p>ስለትክክለኛነቱ ያረጋገጠው ሰራተኛ ስም
+            &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+            ፊርማ&mdash;&mdash;&mdash;&mdash;&mdash;
             ቀን&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
         </p>
 

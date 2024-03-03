@@ -322,10 +322,11 @@ class FormController extends Controller
         $form->lastName = $request->Input('lastName');
         $form->resultOfrecentPerform = $request->Input('resultOfrecentPerform');
         $form->DisciplineFlaw = $request->Input('DisciplineFlaw');
+        $form->DisciplineFlawDate = $request->Input('DisciplineFlawDate');
         $form->level = $request->Input('level');
         $form->UniversityHiringEra = $request->Input('UniversityHiringEra');
         $form->servicPeriodAtUniversity = $request->Input('servicPeriodAtUniversity');
-        $form->servicPeriodAtAnotherPlace = $request->Input('servicPeriodAtAnotherPlace');
+        $form->employer_support = $request->Input('employer_support');
         $form->serviceBeforeDiplo = $request->Input('serviceBeforeDiplo');
         $form->serviceAfterDiplo = $request->Input('serviceAfterDiplo');
         $form->employee_situation = $request->Input('employee_situation');
@@ -425,30 +426,8 @@ class FormController extends Controller
                 }
             }
         }
-        foreach ($request->addEmployeeFields as $key => $value) {
-            // Check if the required fields have values
-            if (
-                isset($value['employer_support'])
-            ) {
-                EmployerSupport::create([
-                    'form_id' => $form->id,
-                    'employer_support' => $value['employer_support'],
-                ]);
-            }
-        }
 
-        $inputEmployeeFields = $request->input('addMoreInputEmployee');
-        foreach ($form->employer_supports as $employer_support) {
-            if (!empty($inputEmployeeFields)) {
-                foreach ($inputEmployeeFields as $key => $value) {
-                    if ($value['id'] == $employer_support->id) {
-                        $employer_support = EmployerSupport::findOrFail($employer_support->id);
-                        $employer_support->employer_support = $value['employer_support'];
-                        $employer_support->update();
-                    }
-                }
-            }
-        }
+
 
         $form->update();
         return redirect('hr');
