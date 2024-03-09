@@ -57,7 +57,9 @@ class PositionController extends Controller
                     "education_type" => $value["education_type"],
 
                     "level" => $value["level"],
-                    "category_id" => $value["category_id"]
+                    "category_id" => $value["category_id"],
+                    "quantity"=>$value["quantity"]
+                    
 
 
                 ]
@@ -79,7 +81,8 @@ class PositionController extends Controller
                     "education_type" => $value["education_type"],
 
                     "level" => $value["level"],
-                    "category_id" => $value["category_id"]
+                    "category_id" => $value["category_id"],
+                    "quantity"=>$value["quantity"]
 
 
                 ]
@@ -150,6 +153,7 @@ class PositionController extends Controller
         $admin->position_type_id = $request->position_type_id;
         $admin->edu_level = $request->Input('edu_level');
         $admin->level = $request->Input('level');
+        $admin->quantity = $request->Input('quantity');
 
         $admin->education_type = $request->Input('education_type');
         // $admin['education_type'] = implode(',',  $input=$request->input('education_type'));
@@ -163,6 +167,7 @@ class PositionController extends Controller
         $admin2->category_id = $request->category_id;
         $admin2->edu_level = $request->Input('edu_level');
         $admin2->level = $request->Input('level');
+        $admin2->quantity = $request->Input('quantity');
         $admin2->education_type = $request->Input('education_type');
         // $admin2['education_type'] = implode(',',  $input=$request->input('education_type'));
 

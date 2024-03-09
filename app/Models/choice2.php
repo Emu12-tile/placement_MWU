@@ -19,7 +19,8 @@ class choice2 extends Model
         'edu_level',
         'education_type',
         'level',
-        'category_id'
+        'category_id',
+        'quantity'
     ];
     public function position_type()
     {

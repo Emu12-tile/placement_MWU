@@ -104,7 +104,7 @@
 
                                             </div>
 
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
 
                                                 <label for="position_type_id">የስራ መደብ ዓይነት</label>
                                                 <select class="form-control custom-select d-block w-100 "
@@ -117,9 +117,9 @@
                                                 </select>
 
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-3">
 
-                                                <label for="category_id">የስራ መደብ ዓይነት</label>
+                                                <label for="category_id">የስራ መደብ ክፍል </label>
                                                 <select class="form-control custom-select d-block w-100 "
                                                     name="addMoreInputFields[0][category_id]">
                                                     @foreach ($category as $col)
@@ -128,6 +128,20 @@
                                                             {{ $col->category }}</option>
                                                     @endforeach
                                                 </select>
+
+                                            </div>
+                                              <div class="col-md-3">
+
+                                                <label for="quantity"> ብዛት</label>
+                                                <input type="number" name="addMoreInputFields[0][quantity]"
+                                                    value="{{ old('quantity') }}"
+                                                    class="form-control  @error('quantity') is-invalid @enderror"
+                                                    id="quantity" placeholder=" ">
+                                                @error('quantity')
+                                                    <span class=" error invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
 
                                             </div>
                                             <div>
@@ -255,7 +269,7 @@
                                                 </select>
 
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
 
                                                  <label for="position_type_id"></label>
                                                    <select class="form-control custom-select d-block w-100 " name="addMoreInputFields[${i}][position_type_id]">
@@ -267,7 +281,7 @@
                                                   </select>
 
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-3">
 
                                                 <label for="category_id"></label>
                                                 <select class="form-control custom-select d-block w-100 "
@@ -280,6 +294,20 @@
                                                 </select>
 
                                             </div>
+                                             <div class="col-md-3">
+                                                   <label for="position_type_id"></label>
+
+                                                   <input type="number" name="addMoreInputFields[${i}][quantity]"
+                                                    value="{{ old('quantity') }}"
+                                                    class="form-control  @error('quantity') is-invalid @enderror"
+                                                    id="quantity" placeholder=" ">
+                                                    @error('quantity')
+                                                    <span class=" error invalid-feedback">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+
+                                                  </div>
 
                                             <div>
                                                 <a href="javascript:void(0)" class="btn bg-red-dark-4 text-white removeRow mt-15" style=" border-radius:50%" >-</a>

@@ -70,6 +70,19 @@
                                         @enderror
                                     </div>
                                 </div>
+                                 <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label"> ብዛት </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" value="{{ $admin->quantity }}"
+                                            name="quantity"class="form-control @error('quantity') is-invalid @enderror"
+                                            id="inputname" placeholder=" ">
+                                        @error('quantity')
+                                            <span class=" error invalid-feedback">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="position_type_id" class="col-sm-2 col-form-label">የስራ መደብ ዓይነት</label>
                                     <div class="col-sm-10">

@@ -21,7 +21,7 @@
                 <div class="col-sm">
                     <div class="table-wrap">
                         <div class="table-responsive">
-                             <table id="datable_1" class="table table-hover  table-bordered w-100  pb-30">
+                            <table id="datable_1" class="table table-hover  table-bordered w-100  pb-30">
                                 <thead>
                                     <tr>
                                         <th>ተ.ቁ</th>
@@ -31,7 +31,7 @@
                                         <th>የትምህርት ዝግጅት </th>
                                         <th> ደረጃ </th>
                                         <th> የስራ ልምድ </th>
-                                        {{-- <th> የስራ መደብ ዓይነት</th> --}}
+                                        <th> ብዛት</th>
                                         {{-- <th> የስራ መደብ ክፍል</th> --}}
                                         <th>ድርጊት</th>
 
@@ -45,7 +45,7 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $admin->position }}
                                             </td>
-                                            <td>{{ $admin->job_category->job_category }}
+                                            <td>{{ $admin->job_category->job_category ?? '' }}
                                             </td>
                                             {{-- <td>{{ $admin->edu_level->education_level }}
                                             </td> --}}
@@ -53,10 +53,11 @@
                                             </td>
                                             <td>
                                                 <button data-toggle="modal" class="btn bg-blue-dark-4 text-white"
-                                                    data-target="#id_{{$i}}">
+                                                    data-target="#id_{{ $i }}">
                                                     {{ Illuminate\Support\Str::of($admin->education_type)->words(3) }}</button>
-                                                <div class="modal fade" id="id_{{$i}}" tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                                <div class="modal fade" id="id_{{ $i }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLongTitle"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -78,6 +79,8 @@
                                             <td>{{ $admin->level }}
                                             </td>
                                             <td>{{ $admin->experience }}
+                                            </td>
+                                            <td>{{ $admin->quantity }}
                                             </td>
 
                                             {{-- <td>{{ $admin->position_type->position_type }}
