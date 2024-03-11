@@ -332,6 +332,7 @@ class FormController extends Controller
         $form->employee_situation = $request->Input('employee_situation');
         $form->sex = $request->Input('sex');
         $form->email = $request->Input('email');
+        $form->phone = $request->Input('phone');
         $form->positionofnow = $request->Input('positionofnow');
         $form->jobcat = $request->Input('jobcat');
         foreach ($request->MoreFields as $key => $value) {
