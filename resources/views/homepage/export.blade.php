@@ -111,7 +111,7 @@
             ምርጫ 2</p>
         <p> የስራ ክፍል:- {{ $form->jobcat2->job_category ?? '' }} </p>
         <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p> --}}
-        <div class="html2pdf__page-break"></div>
+       {{-- / <div class="html2pdf__page-break"></div> --}}
         <p>7/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
 
         <table id="customers">
@@ -208,7 +208,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="html2pdf__page-break"></div>
+        {{-- <div class="html2pdf__page-break"></div> --}}
         <p>8/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
             {{ $form->serviceAfterDiplo }}</p>
         <p>9/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
