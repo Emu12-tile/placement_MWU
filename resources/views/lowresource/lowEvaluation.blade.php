@@ -336,105 +336,61 @@
                             <form action="{{ route('addHrPost', $id) }}" method="POST" id="add_evaluation">
                                 @csrf
                                 <div class="row">
-                                    {{-- <div class="col-md-6"> --}}
-
-
                                     <div class="col-sm">
                                         <div class="table-wrap">
                                             <div class="table-responsive">
                                                 <table class="table table-sm table-bordered mb-0">
                                                     <thead class="thead-active">
                                                         <tr>
-
-                                                            <th>ሙሉ ስም</th>
-                                                            <th>ጾታ</th>
-
-                                                            <th>የሚወዳደሩበት የስራ መደብ</th>
-
-                                                            <th> የተወዳዳሪው የትምህርት ደረጃና የትምህርት ዝግጅት</th>
-
-
-                                                            <th>የስራ ልምድዎ </th>
-                                                            <th>የሁለት ተከታታይ የስራ አፈጻጸም አማካይ ውጤት </th>
-                                                            <th>ተጨማሪ ይመልከቱ</th>
-
-
+                                                            <th rowspan="2">ሙሉ ስም</th>
+                                                            <th rowspan="2">ጾታ</th>
+                                                            <th rowspan="2">የሚወዳደሩበት የስራ መደብ</th>
+                                                            <th colspan="4">አሁን ያሉበት የትምህርት ደረጃና የትምህርት ዝግጅት</th>
+                                                            <th rowspan="2">የሁለት ተከታታይ የስራ አፈጻጸም አማካይ ውጤት</th>
+                                                            <th rowspan="2">ተጨማሪ ይመልከቱ</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> የትምህርት ደረጃ </th>
+                                                            <th>የትምህርት ዝግጅት</th>
+                                                            <th> የትምህርት ዝግጅት (ሲኦሲ) </th>
+                                                            <th> completion_date</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-
                                                         <tr>
-
-                                                            <td>{{ $form->full_name }}
-                                                            </td>
-                                                            <td>{{ $form->sex }}</td>
-                                                            <td>
-                                                                {{ $form->choice2->position }}
-                                                            </td>
-
-
-
-
-                                                            <td>
-
-
-                                                                @foreach ($edu as $type)
-                                                                    ({{ $type->level }},
-                                                                    {{ $type->discipline }})
-                                                                    ,
-                                                                @endforeach
-                                                            </td>
-
-
-
-
-                                                            <td>
-                                                                @foreach ($forms as $fo)
-                                                                    <?php
-
-                                                                    $fdate = Carbon::parse($fo->startingDate);
-
-                                                                    $tdate = Carbon::parse($fo->endingDate);
-
-                                                                    // $years = $tdate - $fdate;
-                                                                    $days = $tdate->diffInDays($fdate);
-                                                                    $months = $tdate->diffInMonths($fdate);
-
-                                                                    $years = $tdate->diffInYears($fdate);
-                                                                    // dd($fdate->diffForHumans($tdate));
-                                                                    // dd($years,$months,$days);
-
-                                                                    $time = $tdate->diff($fdate);
-                                                                    // echo $time->y;
-
-                                                                    echo $time->y, 'ዓመት', 'ከ', $time->m, ' ወር በ(', $fo->positionyouworked, '), ';
-
-                                                                    ?>
-                                                                @endforeach
-                                                            </td>
-                                                            <td>{{ $form->resultOfrecentPerform }}</td>
-                                                            <td data-toggle="collapse" data-target="#more"
-                                                                aria-expanded="false" aria-controls="collapseExample">more
-                                                                <i class='ion ion-md-arrow-round-forward'></i>
-
-
-                                                            </td>
-
-
-
-
-
-
+                                                            <td rowspan="{{ count($edu) + 1 }}">{{ $form->full_name }}</td>
+                                                            <td rowspan="{{ count($edu) + 1 }}">{{ $form->sex }}</td>
+                                                            <td rowspan="{{ count($edu) + 1 }}">
+                                                                {{ $form->position->position }}</td>
+                                                            @foreach ($edu as $index => $type)
+                                                                @if ($index === 0)
+                                                                    <td>{{ $type->level }}</td>
+                                                                    <td>{{ $type->discipline }}</td>
+                                                                    <td>{{ $type->academicPreparationCOC }}</td>
+                                                                    <td>{{ $type->completion_date }}</td>
+                                                                    <td rowspan="{{ count($edu) }}">
+                                                                        {{ $form->resultOfrecentPerform }}</td>
+                                                                    <td data-toggle="collapse" data-target="#more"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="collapseExample"
+                                                                        rowspan="{{ count($edu) }}">more <i
+                                                                            class="ion ion-md-arrow-round-forward"></i>
+                                                                    </td>
+                                                                @else
+                                                        <tr>
+                                                            <td>{{ $type->level }}</td>
+                                                            <td>{{ $type->discipline }}</td>
+                                                            <td>{{ $type->academicPreparationCOC }}</td>
+                                                            <td>{{ $type->completion_date }}</td>
                                                         </tr>
-
+                                                        @endif
+                                                        @endforeach
+                                                        </tr>
                                                     </tbody>
                                                 </table>
-                                                {{-- {!! $hrs->links() !!} --}}
-
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- </div> --}}
                                 </div>
                                 <div class="collapse" id="more">
                                     <div class="card card-body">
@@ -453,16 +409,12 @@
                                                             <th>የትውልድ ዘመን</th>
                                                             <th>በዩኒቨርስቲዉ የቅጥር ዘመን
                                                                 በኢትዮጵያ</th>
-                                                            <th>በዩኒቨርስቲዉ አገልግሎት ዘመን
-                                                                (በዓመት,የስራ
-                                                                መደብ)</th>
-                                                            <th>በሌላ መስርያ ቤት አገልግሎት
-                                                                ዘመን(በዓመት,የስራ
-                                                                መደብ)</th>
+
+                                                            <th>ጠቅላላ አገልግሎት ዘመን(በዓመት)</th>
                                                             <th>አገልግሎት ከዲፕሎማ
-                                                                በፊት(በዓመት,የስራ መደብ)</th>
+                                                                በፊት(በዓመት)</th>
                                                             <th>አገልግሎት ከዲፕሎማ/ዲግሪ
-                                                                በኋላ(በዓመት, የስራ መደብ)</th>
+                                                                በኋላ(በዓመት)</th>
                                                             <th>የዲስፕሊን ጉድለት</th>
                                                             <th>ተጨማሪ የሥራ ድርሻ</th>
 
@@ -478,7 +430,7 @@
                                                             <td>{{ $form->birth_date }}</td>
                                                             <td>{{ $form->UniversityHiringEra }}</td>
                                                             <td>{{ $form->servicPeriodAtUniversity }}</td>
-                                                            <td>{{ $form->servicPeriodAtAnotherPlace }}</td>
+                                                            {{-- <td>{{ $form->servicPeriodAtAnotherPlace }}</td> --}}
                                                             <td>{{ $form->serviceBeforeDiplo }}</td>
                                                             <td>{{ $form->serviceAfterDiplo }}</td>
                                                             <td>{{ $form->DisciplineFlaw }}</td>

@@ -96,6 +96,7 @@ Route::middleware([
 
     Route::resource('/jobcategory', JobCategoryController::class);
     Route::resource('/jobcat2', JobCat2Controller::class);
+    Route::get('/resource/retunApplicant/{id}', [FormController::class, 'returnApplicant'])->name('returnApplicant');
 });
 Route::middleware([
     'auth:sanctum',
@@ -113,14 +114,13 @@ Route::middleware([
         // Route::get('/hr',[FormController::class, 'createforms'] )->name('hr.index');
         // Route::post('/hr/form', [FormController::class, 'store'])->name('add.form');
         Route::get('/step-one', [MultiformController::class, 'createStepOne'])->name('multiforms.create-step-one');
-Route::post('/step-one', [MultiformController::class, 'postCreateStepOne'])->name('multiforms.create.step.one.post');
+        Route::post('/step-one', [MultiformController::class, 'postCreateStepOne'])->name('multiforms.create.step.one.post');
 
-Route::get('/step-two', [MultiformController::class, 'createStepTwo'])->name('multiforms.create.step.two');
+        Route::get('/step-two', [MultiformController::class, 'createStepTwo'])->name('multiforms.create.step.two');
         Route::post('/steptwo',  [MultiformController::class, 'postCreateStepTwo'])->name('multiforms.create.step.two.post');
- Route::get('/step-three', [MultiformController::class, 'createStepThree'])->name('multiforms.create.step.three');
+        Route::get('/step-three', [MultiformController::class, 'createStepThree'])->name('multiforms.create.step.three');
 
- Route::post('/stepthree', [MultiformController::class, 'postCreateStepThree'])->name('multiforms.create.step.three.post');
-
+        Route::post('/stepthree', [MultiformController::class, 'postCreateStepThree'])->name('multiforms.create.step.three.post');
     }
 );
 Route::middleware([

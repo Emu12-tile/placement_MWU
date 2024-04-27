@@ -34,40 +34,44 @@ class FormController extends Controller
 {
 
 
+    // public function index()
+    // {
+    //     $forms = null;
+    //     $searchValue = request()->input('search');
+
+    //     if ($searchValue) {
+    //         $searchWords = explode(' ', $searchValue);
+
+    //         $forms = Form::where('hrs', null)
+    //             ->where(function ($query) use ($searchWords) {
+    //                 foreach ($searchWords as $word) {
+    //                     $query->where(function ($innerQuery) use ($word) {
+    //                         $innerQuery->where('firstName', 'like', '%' . $word . '%')
+    //                             ->orWhere('middleName', 'like', '%' . $word . '%')
+    //                             ->orWhere('lastName', 'like', '%' . $word . '%');
+    //                     });
+    //                 }
+    //             })
+    //             ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
+    //             ->paginate(10);
+    //     } else {
+    //         $searchValue = null;
+    //         // Only fetch all data when there's no search value
+    //         $forms = Form::where('hrs', null)
+    //             ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
+    //             ->paginate(10);
+    //     }
+
+    //     return view('hr.index', [
+    //         'forms' => $forms,
+    //         'searchValue' => $searchValue,
+    //     ]);
+    // }
     public function index()
     {
-        $forms = null;
-        $searchValue = request()->input('search');
-
-        if ($searchValue) {
-            $searchWords = explode(' ', $searchValue);
-
-            $forms = Form::where('hrs', null)
-                ->where(function ($query) use ($searchWords) {
-                    foreach ($searchWords as $word) {
-                        $query->where(function ($innerQuery) use ($word) {
-                            $innerQuery->where('firstName', 'like', '%' . $word . '%')
-                                ->orWhere('middleName', 'like', '%' . $word . '%')
-                                ->orWhere('lastName', 'like', '%' . $word . '%');
-                        });
-                    }
-                })
-                ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
-                ->paginate(10);
-        } else {
-            $searchValue = null;
-            // Only fetch all data when there's no search value
-            $forms = Form::where('hrs', null)
-                ->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id',  'isEditable')
-                ->paginate(10);
-        }
-
-        return view('hr.index', [
-            'forms' => $forms,
-            'searchValue' => $searchValue,
-        ]);
+        $forms = Form::where('hrs', null)->select('firstName', 'middleName', 'lastName', 'id', 'job_category_id', 'jobcat2_id', 'position_id', 'choice2_id', 'isEditable', 'submit')->get();
+        return view('hr.index', ['forms' => $forms]);
     }
-
     public function form()
     {
 
@@ -403,17 +407,17 @@ class FormController extends Controller
         }
         // more roles
 
-            foreach ($request-> addMoreroleFields as $key => $value) {
-                // Check if the required fields have values
-                if (
-                    isset($value['more_role'])
-                ) {
-                    Morerole::create([
-                        'form_id' => $form->id,
-                        'more_role' => $value['more_role'],
-                    ]);
-                }
+        foreach ($request->addMoreroleFields as $key => $value) {
+            // Check if the required fields have values
+            if (
+                isset($value['more_role'])
+            ) {
+                Morerole::create([
+                    'form_id' => $form->id,
+                    'more_role' => $value['more_role'],
+                ]);
             }
+        }
 
         $inputMoreroleFields = $request->input('addMoreInputRoles');
         foreach ($form->moreroles as $morerole) {
@@ -488,6 +492,18 @@ class FormController extends Controller
         // dd($hr);
 
         return back()->with('status', 'approved  successfully');
+    }
+    public function returnApplicant(Request $request, $id)
+    {
+        $hr = Form::find($id);
+        $hr->isEditable = 0;
+        // $hr->submit = auth()->user()->name;
+
+        $hr->update();
+
+
+        // return redirect('resource')->with('status', 'stock updated successfully');
+        return redirect()->back()->with('status', ' updated successfully');
     }
 
 

@@ -326,9 +326,9 @@
                                                         </tr>
                                                         <tr>
                                                             <th> የትምህርት ደረጃ </th>
-                                                            <th> የትምህርት ደረጃ </th>
-                                                            <th> የትምህርት ደረጃ </th>
-                                                            <th> የትምህርት ደረጃ </th>
+                                                            <th>የትምህርት ዝግጅት</th>
+                                                            <th> የትምህርት ዝግጅት (ሲኦሲ) </th>
+                                                            <th> completion_date</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
