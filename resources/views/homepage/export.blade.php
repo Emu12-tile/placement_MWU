@@ -102,7 +102,7 @@
         </p>
         <p>6/ ጠቅላላ አገልግሎት ዘመን (በዓመት):-{{ $form->servicPeriodAtUniversity }} </p>
         {{-- <p>7/ በሌላ መስርያ ቤት አገልግሎት ዘመን:-{{ $form->servicPeriodAtAnotherPlace }} </p> --}}
-        {{-- <h5>8/ የሚወዳደሩበት የስራ ክፍልና የስራ መደብ</h5>
+        <h5>7/ የሚወዳደሩበት የስራ ክፍልና የስራ መደብ</h5>
         <p> ምርጫ 1</p>
 
         <p> የስራ ክፍል :-{{ $form->job_category->job_category ?? '' }}</p>
@@ -110,9 +110,9 @@
         <p>
             ምርጫ 2</p>
         <p> የስራ ክፍል:- {{ $form->jobcat2->job_category ?? '' }} </p>
-        <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p> --}}
-       {{-- / <div class="html2pdf__page-break"></div> --}}
-        <p>7/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
+        <p> የስራ መደብ:- {{ $form->choice2->position ?? '' }}</p>
+        {{-- / <div class="html2pdf__page-break"></div> --}}
+        <p>8/ ጠቅላላ የስራ ልምድ ብዛትና የስራው አይነት</p>
 
         <table id="customers">
             <thead>
@@ -153,23 +153,23 @@
                         <td>{{ $fo->positionyouworked }}</td>
                         <td>
                             <?php
-
+                            
                             $fdate = Carbon::parse($fo->startingDate);
-
+                            
                             $tdate = Carbon::parse($fo->endingDate);
-
+                            
                             // $years = $tdate - $fdate;
-
+                            
                             // echo abs($years);
                             //
-
+                            
                             $days = $tdate->diffInDays($fdate);
                             $months = $tdate->diffInMonths($fdate);
-
+                            
                             $years = $tdate->diffInYears($fdate);
                             // dd($fdate->diffForHumans($tdate));
                             // dd($years,$months,$days);
-
+                            
                             $time = $tdate->diff($fdate);
                             echo $time->y;
                             //   {{$time->y}} year, {{$time->m}} months, {{$time->d}} days
@@ -178,13 +178,13 @@
                         </td>
                         <td>
                             <?php
-
+                            
                             $fdate = Carbon::parse($fo->startingDate);
-
+                            
                             $tdate = Carbon::parse($fo->endingDate);
-
+                            
                             // $months = $tdate - $fdate;
-
+                            
                             //   echo abs($months);
                             $time = $tdate->diff($fdate);
                             echo $time->m;
@@ -192,9 +192,9 @@
                         </td>
                         <td>
                             <?php
-
+                            
                             // $fdate = Carbon::parse($fo->startingDate);
-
+                            
                             // $tdate = Carbon::parse($fo->endingDate);
                             $time = $tdate->diff($fdate);
                             // $days = $tdate - $fdate;
@@ -209,22 +209,22 @@
             </tbody>
         </table>
         {{-- <div class="html2pdf__page-break"></div> --}}
-        <p>8/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
+        <p>9/ አገልግሎት ከዲፕሎማ/ዲግሪ በፊት:- {{ $form->serviceBeforeDiplo }} ፣ አገልግሎት ከዲፕሎማ/ዲግሪ በኋላ
             {{ $form->serviceAfterDiplo }}</p>
-        <p>9/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
-        <p>10/ የዲስፕሊን ጉድለት:-{{ $form->DisciplineFlaw }} {{ $form->DisciplineFlawDate }}</p>
-        <p>11/ የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት:-
+        <p>10/ የሁለት ተከታታይ የቅርብ ጊዜ የሥራ አፈጻፀም አማካይ ውጤት:-{{ $form->resultOfrecentPerform }}</p>
+        <p>11/ የዲስፕሊን ጉድለት:-{{ $form->DisciplineFlaw }} {{ $form->DisciplineFlawDate }}</p>
+        <p>12/ የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት:-
             {{ $form->employer_support }}
         </p>
-        <p>12/ ሰራተኛው ያለበት ሁኔታ:-{{ $form->employee_situation }}</p>
-        <p>13/ ተጨማሪ የሥራ ድርሻ:-@foreach ($morerole as $i => $fo)
+        <p>13/ ሰራተኛው ያለበት ሁኔታ:-{{ $form->employee_situation }}</p>
+        <p>14/ ተጨማሪ የሥራ ድርሻ:-@foreach ($morerole as $i => $fo)
                 {{ $fo->more_role ?? '' }},
             @endforeach
         </p>
-        <p>ቅጹን የሞላው የሰዉ ሀብት ባለሙያ {{ Auth()->user()->name }}
+        <p>ቅጹን የሞላው ሰራተኛ ስም &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
             ፊርማ&mdash;&mdash;&mdash;&mdash; ቀን&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
-        <p>ስለትክክለኛነቱ ያረጋገጠው ሰራተኛ ስም
-            &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+        <p>ስለትክክለኛነቱ ያረጋገጠው የሰዉ ሀብት ባለሙያ {{ Auth()->user()->name }}
+
             ፊርማ&mdash;&mdash;&mdash;&mdash;&mdash;
             ቀን&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
         </p>
