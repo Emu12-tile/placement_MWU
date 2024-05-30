@@ -557,7 +557,9 @@
                                                                     </td>
 
                                                                 </tr>
+                                                               
                                                             @endforeach
+
                                                             <tr>
                                                                 <td colspan="2" class="text-center">ድምር</td>
                                                                 {{-- <td></td> --}}

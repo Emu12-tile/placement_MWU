@@ -17,9 +17,6 @@ class JobCat2Controller extends Controller
     }
     public function create()
     {
-
-
-
         return view('adminpage.jobcat.create');
     }
     public function store(Request $request)
@@ -67,4 +64,5 @@ class JobCat2Controller extends Controller
         $admin->delete();
         return redirect('jobcat2')->with('status', 'jobcategory  deleted successfully');
     }
+
 }

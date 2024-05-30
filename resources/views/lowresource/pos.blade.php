@@ -42,6 +42,7 @@
                             <tbody>
 
                                 @foreach ($forms as $i => $form)
+                                @if($form->position_type_id==2)
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>
@@ -51,18 +52,10 @@
                                                     data-original-title="show">{{ $form->job_category->job_category }}\{{ $form->position }}
                                                 </a>
                                             </form>
-                                        </td>
-
-
-
-
-
-
-
-
-
+                                        
                                         </td>
                                     </tr>
+                                  @endif  
                                 @endforeach
 
                             </tbody>

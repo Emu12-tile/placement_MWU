@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\choice2;
 use App\Models\Position;
 use App\Models\Education;
+use App\Models\Secondhr;
 use App\Models\experience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,10 +40,13 @@ class ResourceController extends Controller
             join('forms', 'forms.position_id', '=', 'positions.id')
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
+            ->whereNotNull('forms.hrs')
+            ->orWhereNotNull('forms.secondhrs')
+            
             ->where('positions.position_type_id', 1)
             ->distinct('positions.id')
 
-            ->get(['positions.id', 'positions.position', 'positions.job_category_id', 'categories.category']);
+            ->get(['positions.id', 'positions.position', 'positions.job_category_id', 'categories.category','positions.position_type_id']);
         // $forms2 = choice2::join('forms', 'forms.choice2_id', '=', 'choice2s.id')
         // ->join('categories', 'categories.id', '=', 'choice2s.category_id')
         // ->where('categories.catstatus', 'active')
@@ -65,22 +69,35 @@ class ResourceController extends Controller
             ->where('positions.id', $pos_id)
             ->select('h_r_s.*')
             ->get();
+            
+            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+
+            // ->where('status_hr', 1)
+            ->where('choice2s.id', $pos_id)
+            ->select('secondhrs.*')
+            ->get();
 
 
 
-        return view('resource.result', compact('hrs'));
+
+
+        return view('resource.result', compact('hrs','secondhrs'));
     }
 
 
     public function poslow()
     {
-
+    
         $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
+            // ->whereNotNull('forms.hrs')
+            // ->where('forms.hrs',!NULL)
+            // ->orWhereNotNull('forms.secondhrs')
             ->where('positions.position_type_id', 2)
             ->distinct('positions.id')
-            ->get(['positions.id', 'positions.position', 'positions.job_category_id']);
+            ->get(['positions.id', 'positions.position', 'positions.job_category_id','position_type_id']);
 
         return view('lowresource.pos', compact('forms'));
     }
@@ -98,6 +115,13 @@ class ResourceController extends Controller
             ->where('positions.id', $pos_id)
             ->select('h_r_s.*')
             ->get();
+            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+
+            // ->where('status_hr', 1)
+            ->where('choice2s.id', $pos_id)
+            ->select('secondhrs.*')
+            ->get();
 
         // $forms = experience::where('form_id', $hrs->form_id)->get();
         // $edu = Education::where('form_id',$hrs->form_id)->get();
@@ -105,7 +129,7 @@ class ResourceController extends Controller
         //  dd($hrs);
 
 
-        return view('lowresource.index', ['hrs' => $hrs]);
+        return view('lowresource.index', ['hrs' => $hrs,'secondhrs'=>$secondhrs]);
     }
 
 

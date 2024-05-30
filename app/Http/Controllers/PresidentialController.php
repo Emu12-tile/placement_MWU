@@ -43,13 +43,19 @@ class PresidentialController extends Controller
 
     public function pos()
     {
+
+        
         $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
+               ->join('h_r_s','h_r_s.form_id','=','forms.id')
+               ->join('secondhrs','secondhrs.form_id','forms.id')
+
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
+            ->where('h_r_s.status_hr',1)
             ->where('positions.position_type_id', 1)
             ->distinct('positions.id')
             ->get(['positions.id', 'positions.position', 'positions.job_category_id','categories.category']);
-
+    //    dd($forms);
         return view('presidential.pos', compact('forms'));
     }
     public function posDetailpres($id)

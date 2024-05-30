@@ -94,8 +94,26 @@ class FormController extends Controller
             ->where('positions.id', $pos_id)
             ->select('forms.*', 'positions.position')
             ->get();
+            $forms2 = Form::join(
+                'choice2s',
+                'choice2s.id',
+                '=',
+                'forms.choice2_id'
+            )
+                ->join(
+                    'categories',
+                    'categories.id',
+                    '=',
+                    'choice2s.category_id'
+                )
+                ->where('categories.catstatus', 'active')
+                ->where('secondhrs', null)
+                ->where('choice2s.id', $pos_id)
+                ->select('forms.*')
+                ->get();
+    
 
-        return view('hr.index', compact('forms'));
+        return view('hr.index', compact('forms','forms2'));
     }
     public function pos()
     {
@@ -109,6 +127,7 @@ class FormController extends Controller
         $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
+            ->where('forms.hrs',NULL)
             ->distinct('positions.id')
             ->get(['positions.id', 'positions.position', 'positions.job_category_id']);
 

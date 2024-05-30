@@ -15,7 +15,7 @@
 
 
                 </div>
-                <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ ምርጫ </h5>
+                <h5 class="hk-sec-title">ከቡድን መሪ በላይ ተወዳዳሪዎች 1ኛ  ምርጫ </h5>
 
 
                 <div class="row" id="search_list">
@@ -46,6 +46,7 @@
                                     $j = 0;
                                     ?>
                                     @foreach ($forms as $i => $form)
+                                    @if($form->position_type_id==1)
 
                                             <tr>
                                                 <td>{{ ++$j }}</td>
@@ -60,17 +61,9 @@
                                                     </form>
 
                                                 </td>
-
-
-
-
-
-
-
-
-
-                                                </td>
+                                            
                                             </tr>
+                                            @endif
 
                                     @endforeach
 

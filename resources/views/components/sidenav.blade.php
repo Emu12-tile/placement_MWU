@@ -141,24 +141,16 @@
 
                         <li class="nav-item active">
 
-                            <span class="nav-link-text"> ምርጫ 1</span>
+                            <span class="nav-link-text"> ምርጫ </span>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('pos') }}">
                                 <i class="ion ion-ios-list-box"></i>
                                 <span class="nav-link-text">
-                                    የተወዳዳሪዎች 1ኛ ምርጫ
+                                    የተወዳዳሪዎች 1ኛ ና 2ኛ ምርጫ
                                 </span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-
-                            <a class="nav-link" href="{{ route('resource.index') }}">
-                                <i class="ion ion-ios-list-box"></i>
-                                <span class="nav-link-text">
-                                    ያወዳዳሪ ኮሚቴ ውጤት
-                                </span>
-                            </a>
-                        </li> --}}
+                      
                         <li class="nav-item">
 
                             <a class="nav-link" href="{{ url('positionhigh') }}">
@@ -171,15 +163,7 @@
 
 
 
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('lowresource.lowresource') }}">
-                                <i class="ion ion-ios-list-box"></i>
-                                <span class="nav-link-text">
-                                    ውጤት (ከ ቡድን መሪ
-                                    በታች)
-                                </span>
-                            </a>
-                        </li> --}}
+                       
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('positionresult') }}">
                                 <i class="ion ion-ios-list-box"></i>
@@ -190,16 +174,7 @@
                             </a>
                         </li>
 
-
-
-
-
-
-
-
-
-
-                        <li class="nav-item active">
+                        {{-- <li class="nav-item active">
 
                             <span class="nav-link-text"> ምርጫ 2</span>
 
@@ -212,15 +187,7 @@
                                 </span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-
-                            <a class="nav-link" href="{{ route('secondhr.index') }}">
-                                <i class="ion ion-ios-list-box"></i>
-                                <span class="nav-link-text">
-                                    ያወዳዳሪ ኮሚቴ ውጤት
-                                </span>
-                            </a>
-                        </li> --}}
+                    
                         <li class="nav-item">
 
                             <a class="nav-link" href="{{ url('choicesecond') }}">
@@ -231,17 +198,6 @@
                             </a>
                         </li>
 
-
-
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('secondchoice.lowresource') }}">
-                                <i class="ion ion-ios-list-box"></i>
-                                <span class="nav-link-text">
-                                    ውጤት (ከ ቡድን መሪ
-                                    በታች)
-                                </span>
-                            </a>
-                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('choicelow') }}">
                                 <i class="ion ion-ios-list-box"></i>
@@ -252,7 +208,7 @@
                             </a>
                         </li>
 
-                        </li>
+                        </li> --}}
                     @endrole
                     @role('president')
                         <li class="nav-item">
