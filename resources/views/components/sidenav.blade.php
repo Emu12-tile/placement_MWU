@@ -128,7 +128,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
 
                             <a class="nav-link" href="{{ route('posall') }}">
                                 <i class="ion ion-ios-list-box"></i>
@@ -136,7 +136,7 @@
                                     ከደረጃ በላይ አጠቃላይ ውጤት ከ(100%)
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
 
 
                         <li class="nav-item active">
@@ -173,6 +173,32 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="nav-item active">
+
+                            <span class="nav-link-text"> አጠቃላይ ውጤት </span> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('pos2') }}">
+                                    <i class="ion ion-ios-list-box"></i>
+                                    <span class="nav-link-text">
+                                        ከቡድን መሪ በላይ 
+                                    </span>
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+    
+                                <a class="nav-link" href="{{ url('choicesecond') }}">
+                                    <i class="ion ion-ios-list-box"></i>
+                                    <span class="nav-link-text">
+                                        ከቡድን መሪ
+                                        በታች
+                                    </span>
+                                </a>
+                            </li>
+    
+                           
+    
+                            </li> 
 
                         {{-- <li class="nav-item active">
 

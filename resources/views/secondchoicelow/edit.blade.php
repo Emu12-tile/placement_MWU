@@ -263,102 +263,67 @@
                                             <table class="table table-sm table-bordered mb-0">
                                                 <thead class="thead-active">
                                                     <tr>
-
-                                                        <th>ሙሉ ስም</th>
-                                                        <th>ጾታ</th>
-
-                                                        <th>የሚወዳደሩት የስራ መደብ</th>
-                                                        <th>የትምህርት ደረጃና የትምህርት ዝግጅት</th>
-
-                                                        <th> ያለዎት የስራ ልምድ </th>
-
-                                                        <th>የሁለት ተከታታይ የስራ አፈጻጸም አማካይ ውጤት </th>
-                                                        <th>ተጨማሪ ይመልከቱ</th>
-
-
+                                                        <th rowspan="2">ሙሉ ስም</th>
+                                                        <th rowspan="2">ጾታ</th>
+                                                        <th rowspan="2">የሚወዳደሩበት የስራ መደብ</th>
+                                                        <th colspan="4">አሁን ያሉበት የትምህርት ደረጃና የትምህርት ዝግጅት</th>
+                                                        <th rowspan="2">የሁለት ተከታታይ የስራ አፈጻጸም አማካይ ውጤት</th>
+                                                        <th rowspan="2">ተጨማሪ ይመልከቱ</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th> የትምህርት ደረጃ </th>
+                                                        <th>የትምህርት ዝግጅት</th>
+                                                        <th> የትምህርት ዝግጅት (ሲኦሲ) </th>
+                                                        <th> completion_date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
                                                     <tr>
-
-                                                        <td>{{ $hr->form->full_name }}
-                                                        </td>
-                                                        <td>{{ $hr->form->sex }}
-                                                        </td>
-                                                        <td>{{ $hr->form->choice2->position }}</td>
-
-                                                        <td>
-                                                            @foreach ($edu as $type)
-                                                                ({{ $type->level }},
-                                                                {{ $type->discipline }})
-                                                                ,
-                                                            @endforeach
-                                                        </td>
-
-
-
-                                                        <td>
-                                                            @foreach ($forms as $fo)
-                                                                <?php
-
-                                                                $fdate = Carbon::parse($fo->startingDate);
-
-                                                                $tdate = Carbon::parse($fo->endingDate);
-
-                                                                // $years = $tdate - $fdate;
-                                                                $days = $tdate->diffInDays($fdate);
-                                                                $months = $tdate->diffInMonths($fdate);
-
-                                                                $years = $tdate->diffInYears($fdate);
-                                                                // dd($fdate->diffForHumans($tdate));
-                                                                // dd($years,$months,$days);
-
-                                                                $time = $tdate->diff($fdate);
-                                                                // echo $time->y;
-
-                                                                echo $time->y, 'ዓመት', 'ከ', $time->m, ' ወር በ(', $fo->positionyouworked, '), ';
-
-                                                                ?>
-                                                            @endforeach
-                                                        </td>
-
-                                                        <td>
-                                                            {{ $hr->form->resultOfrecentPerform }}
-                                                        </td>
-                                                        <td data-toggle="collapse" data-target="#more" aria-expanded="false"
-                                                            aria-controls="collapseExample">more <i
-                                                                class='ion ion-md-arrow-round-forward'></i>
-
-
-                                                        </td>
-
-
-
-
-
+                                                        <td rowspan="{{ count($edu) + 1 }}">{{ $hr->form->full_name }}</td>
+                                                        <td rowspan="{{ count($edu) + 1 }}">{{ $hr->form->sex }}</td>
+                                                        <td rowspan="{{ count($edu) + 1 }}">
+                                                            {{  $hr->form->choice2->position }}</td>
+                                                        @foreach ($edu as $index => $type)
+                                                            @if ($index === 0)
+                                                                <td>{{ $type->level }}</td>
+                                                                <td>{{ $type->discipline }}</td>
+                                                                <td>{{ $type->academicPreparationCOC }}</td>
+                                                                <td>{{ $type->completion_date }}</td>
+                                                                <td rowspan="{{ count($edu) }}">
+                                                                    {{ $hr->form->resultOfrecentPerform }}</td>
+                                                                <td data-toggle="collapse" data-target="#more"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="collapseExample"
+                                                                    rowspan="{{ count($edu) }}">more <i
+                                                                        class="ion ion-md-arrow-round-forward"></i>
+                                                                </td>
+                                                            @else
+                                                    <tr>
+                                                        <td>{{ $type->level }}</td>
+                                                        <td>{{ $type->discipline }}</td>
+                                                        <td>{{ $type->academicPreparationCOC }}</td>
+                                                        <td>{{ $type->completion_date }}</td>
                                                     </tr>
-
+                                                    @endif
+                                                    @endforeach
+                                                    </tr>
                                                 </tbody>
                                             </table>
-                                            {{-- {!! $hrs->links() !!} --}}
-
                                         </div>
                                     </div>
                                 </div>
-                                {{-- </div> --}}
                             </div>
                             <div class="collapse" id="more">
                                 <div class="card card-body">
-
+            
                                     <div class="table-wrap mb-20 ">
                                         <div class="table-responsive">
                                             <table class="table table-active table-bordered mb-0">
                                                 <thead class="thead-active">
                                                     <tr>
-
-
+                                                        {{-- <th> የስራ ልምድዎ </th> --}}
                                                         <th>አሁን ያሉበት የስራ ክፍል</th>
+            
                                                         <th>አሁን ያሉበት የስራ መደብ</th>
                                                         <th>ብሔር</th>
                                                         <th>የትውልድ ዘመን</th>
@@ -375,14 +340,16 @@
                                                         <th>አገልግሎት ከዲፕሎማ/ዲግሪ
                                                             በኋላ(በዓመት, የስራ መደብ)</th>
                                                         <th>የዲስፕሊን ጉድለት</th>
+                                                        <th>የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</th>
+                                                        <th>ሰራተኛው ያለበት ሁኔታ </th>
                                                         <th>ተጨማሪ የሥራ ድርሻ</th>
-
-
+            
                                                     </tr>
                                                 </thead>
-
+            
                                                 <tbody>
                                                     <tr>
+                                                      
                                                         <td>{{ $hr->form->jobcat }}</td>
                                                         <td>{{ $hr->form->positionofnow }}</td>
                                                         <td>{{ $hr->form->ethinicity }}</td>
@@ -392,13 +359,13 @@
                                                         <td>{{ $hr->form->servicPeriodAtAnotherPlace }}</td>
                                                         <td>{{ $hr->form->serviceBeforeDiplo }}</td>
                                                         <td>{{ $hr->form->serviceAfterDiplo }}</td>
-                                                        <td>{{ $hr->form->DisciplineFlaw }}</td>
-                                                        <td>{{ $hr->form->MoreRoles }}</td>
-
+                                                        <td>{{ $hr->form->DisciplineFlaw }},{{$form->DisciplineFlawDate}}</td>
+                                                        <td> {{$hr->form->employer_support}}
+                                                         </td>
+                                                        <td>{{ $hr->form->employee_situation }}</td>
                                                     </tr>
-
                                                 </tbody>
-
+            
                                             </table>
                                         </div>
                                     </div>
@@ -465,6 +432,7 @@
 
                                                             <th>ብዜት</th>
                                                             <th>ዓመት-ወር-ቀን</th>
+                                                            <th></th>
 
 
                                                         </tr>
@@ -520,6 +488,8 @@
                                                             <td colspan="2" class="text-center">ድምር</td>
                                                             {{-- <td></td> --}}
                                                             <td id="total-year"></td>
+                                                            <td>- {{ preg_replace('/[^0-9]/', '', $hr->form->choice2->experience) }}</td>
+
                                                         </tr>
                                                     </tbody>
                                                 </table>

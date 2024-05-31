@@ -127,12 +127,12 @@ class FormController extends Controller
         $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
             ->join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
-            ->where('forms.hrs',NULL)
+            // ->where('forms.hrs',NULL)
             ->distinct('positions.id')
-            ->get(['positions.id', 'positions.position', 'positions.job_category_id']);
+            ->get(['positions.id', 'positions.position', 'positions.job_category_id','categories.category']);
 
 
-
+        // $form->category->category=='general'
 
         return view('hr.pos', compact('forms'));
     }
