@@ -14,6 +14,18 @@ $(document).ready(function() {
 
 		}
 	});
+	$('#datable_8').DataTable({
+		responsive: true,
+		autoWidth: false,
+        deferRender:true,
+		language: { search: "",
+		searchPlaceholder: "Search",
+		sLengthMenu: "_MENU_items",
+
+
+		}
+	});
+	
 
     $('#datable_2').DataTable({
 		autoWidth: false,
@@ -72,6 +84,42 @@ $('#datable_6').DataTable( {
 			$('.dt-buttons > .btn').addClass('btn-outline-light btn-sm');
 		}
 	} );
+	$('#datable_7').DataTable( {
+		dom: 'Bfrtip',
+		responsive: true,
+		language: { search: "",searchPlaceholder: "Search" },
+		"bPaginate": false,
+		"info":     false,
+		"bFilter":     false,
+		buttons: [{
+			//       extend:['copy', 'csv', 'excel', 'pdf', 'print'],
+            // exportOptions: {
+            //     columns: ':visible:not(.exclude)' // exclude columns with the class 'exclude'
+            // }
+
+            extend: 'print',
+            exportOptions: {
+                columns: ':visible:not(:contains("Action")):not(:contains("pdf")):not(:contains("Submit"))'
+            }
+        },
+        {
+            extend: 'excel',
+            exportOptions: {
+                columns: ':visible:not(:contains("Action")):not(:contains("pdf")):not(:contains("Submit"))'
+            }
+        },
+        {
+            extend: 'copy',
+            exportOptions: {
+                columns: ':visible:not(:contains("Action")):not(:contains("pdf")):not(:contains("Submit"))'
+            }
+        }
+        ],
+		"drawCallback": function () {
+			$('.dt-buttons > .btn').addClass('btn-outline-light btn-sm');
+		}
+	} );
+
 
 	var table = $('#datable_5').DataTable({
 		responsive: true,

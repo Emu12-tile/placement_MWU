@@ -8,7 +8,6 @@
         </div>
     @endif
     <div class="container">
-
         <section class="hk-sec-wrapper mt-100">
             {{-- <div class="pull-right hk-sec-title">
 
@@ -154,10 +153,5 @@
                 </div>
             </div>
         </section>
-
-
-
-
-
     </div>
 @endsection

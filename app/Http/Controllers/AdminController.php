@@ -37,20 +37,7 @@ class AdminController extends Controller
     }
     public function posall2()
     {
-        // $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
-        //     ->join('categories', 'categories.id', '=', 'positions.category_id')
-        //     ->where('categories.catstatus', 'active')
-        //     ->where('positions.position_type_id', 1)
-        //     ->distinct('positions.id')
-
-        //     ->get(['positions.id', 'positions.position', 'positions.job_category_id', 'categories.category']);
-        // $form2 = choice2::join('forms', 'forms.choice2_id', '=', 'choice2s.id')
-        //     ->join('categories', 'categories.id', '=', 'choice2s.category_id')
-        //     ->where('categories.catstatus', 'active')
-        //     ->where('choice2s.position_type_id', 1)
-
-        //     ->distinct('choice2s.id')
-        //     ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id', 'categories.category']);
+      
         $form3 = Form::join('positions', 'positions.id', '=', 'forms.position_id')
             ->join('choice2s', 'choice2s.id', 'forms.choice2_id')
             ->where('choice2s.position_type_id', 1)

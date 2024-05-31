@@ -204,9 +204,11 @@ class SecondhrController extends Controller
 
         // }
         if ($request->type == 'first') {
-            return redirect('posDetail2/' . $res->form->choice2_id)->with('status', 'evaluation added successfully');
+            return redirect('posDetail/' . $res->form->choice2_id)->with('status', 'evaluation added successfully');
+            // return redirect('posDetail2/' . $res->form->choice2_id)->with('status', 'evaluation added successfully');
+//
         } else if ($request->type == 'second') {
-            return redirect('posDetail2/' . $res->form->choice2_id)->with('status', 'evaluation added successfully');;
+            return redirect('posDetail/' . $res->form->choice2_id)->with('status', 'evaluation added successfully');;
         }
     }
     public function edit($id)
@@ -238,7 +240,10 @@ class SecondhrController extends Controller
 
         $hr->update();
         if ($request->type == 'first') {
-            return redirect('posDetailtwo/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');
+            
+            return redirect('positionDetailhigh/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');
+
+            // return redirect('posDetailtwo/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');
         } else if ($request->type == 'second') {
             return redirect('choiceDetaillow/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');;
         }

@@ -375,7 +375,7 @@
                                                 <table class="table table-active table-bordered mb-0">
                                                     <thead class="thead-active">
                                                         <tr>
-                                                            <th> የስራ ልምድዎ </th>
+                                                            {{-- <th> የስራ ልምድዎ </th> --}}
                                                             <th>አሁን ያሉበት የስራ ክፍል</th>
 
                                                             <th>አሁን ያሉበት የስራ መደብ</th>
@@ -403,25 +403,7 @@
 
                                                     <tbody>
                                                         <tr>
-                                                            <td>
-                                                                @foreach ($forms as $fo)
-                                                                    <?php
-
-                                                                    $fdate = Carbon::parse($fo->startingDate);
-
-                                                                    $tdate = Carbon::parse($fo->endingDate);
-
-                                                                    // $years = $tdate - $fdate;
-                                                                    $days = $tdate->diffInDays($fdate);
-                                                                    $months = $tdate->diffInMonths($fdate);
-
-                                                                    $years = $tdate->diffInYears($fdate);
-                                                                    $time = $tdate->diff($fdate);
-                                                                    echo $time->y, 'ዓመት', 'ከ', $time->m, ' ወር በ(', $fo->positionyouworked, '), ';
-
-                                                                    ?>
-                                                                @endforeach
-                                                            </td>
+                                                           
                                                             <td>{{ $form->jobcat }}</td>
                                                             <td>{{ $form->positionofnow }}</td>
                                                             <td>{{ $form->ethinicity }}</td>
@@ -528,6 +510,7 @@
 
                                                                 <th>ብዜት</th>
                                                                 <th>ዓመት-ወር-ቀን</th>
+                                                                <th></th>
 
 
                                                             </tr>
@@ -557,6 +540,7 @@
 
 
                                                                     </td>
+                                                                   
 
                                                                     <td>
                                                                         <div class="col-md-10">
@@ -581,7 +565,10 @@
                                                                 <td colspan="2" class="text-center">ድምር</td>
 
                                                                 <td id="total-year"></td>
+                                                                <td>- {{ preg_replace('/[^0-9]/', '', $form->position->experience) }}</td>
+                                                                
                                                             </tr>
+                                                           
                                                         </tbody>
                                                     </table>
                                                 </div>
