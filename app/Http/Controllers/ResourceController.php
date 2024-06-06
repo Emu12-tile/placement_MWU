@@ -37,11 +37,11 @@ class ResourceController extends Controller
     {
         $forms = Position::
             // where('position_type_id',1)->get();
-            join('forms', 'forms.position_id', '=', 'positions.id')
-            ->join('categories', 'categories.id', '=', 'positions.category_id')
+            // join('forms', 'forms.position_id', '=', 'positions.id')
+            join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
-            ->whereNotNull('forms.hrs')
-            ->orWhereNotNull('forms.secondhrs')
+            // ->whereNotNull('forms.hrs')
+            // ->orWhereNotNull('forms.secondhrs')
             
             ->where('positions.position_type_id', 1)
             ->distinct('positions.id')
@@ -102,13 +102,14 @@ class ResourceController extends Controller
 
 
 
-        $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
+        $forms = Position::
+            // join('forms', 'forms.position_id', '=', 'positions.id')
                         //  ->join ('forms','forms.choice2_id','=','choice2s.id')
-            ->join('categories', 'categories.id', '=', 'positions.category_id')
+            join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
             // ->where('forms.pos',1)
-            ->whereNotNull('forms.hrs',)
-            ->orWhereNotNull('forms.secondhrs')
+            // ->whereNotNull('forms.hrs',)
+            // ->orWhereNotNull('forms.secondhrs')
             ->where('positions.position_type_id', 2)
             ->distinct('positions.id')
             // ->get();
