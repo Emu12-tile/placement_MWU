@@ -24,11 +24,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php
+                                $j = 0;
+                                ?>
                                 @foreach ($forms as $i => $form)
                                 @if($form->category=='Executive')
                                     <tr>
-                                        <td>{{ ++$i }}</td>
+                                        <td>{{ ++$j }}</td>
                                         <td>
                                             <form action="" method="POST"><a
                                                     href="{{ route('posDetail', $form->id) }}" class="mr-25"
@@ -58,7 +60,7 @@
                 <div class="col-sm">
                     <div class="table-wrap">
 
-                        <table id="datable_1" class="table table-hover  table-bordered w-100  pb-30">
+                        <table id="datable_8" class="table table-hover  table-bordered w-100  pb-30">
                             <thead>
                                 <tr>
                                     <th>ተቁ</th>
@@ -66,11 +68,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php
+                                $j = 0;
+                                ?>
                                 @foreach ($forms as $i => $form)
                                 @if($form->category=='Team_Leader')
                                     <tr>
-                                        <td>{{ ++$i }}</td>
+                                        <td>{{ ++$j }}</td>
                                         <td>
                                             <form action="" method="POST"><a
                                                     href="{{ route('posDetail', $form->id) }}" class="mr-25"
@@ -100,7 +104,7 @@
                 <div class="col-sm">
                     <div class="table-wrap">
     
-                        <table id="datable_1" class="table table-hover  table-bordered w-100  pb-30">
+                        <table id="datable_8" class="table table-hover  table-bordered w-100  pb-30">
                             <thead>
                                 <tr>
                                     <th>ተቁ</th>
@@ -108,11 +112,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-    
+                                <?php
+                                $j = 0;
+                                ?>
                                 @foreach ($forms as $i => $form)
                                 @if($form->category!='Team_Leader' &&  $form->category!='Executive')
                                     <tr>
-                                        <td>{{ ++$i }}</td>
+                                        <td>{{ ++$j}}</td>
                                         <td>
                                             <form action="" method="POST"><a
                                                     href="{{ route('posDetail', $form->id) }}" class="mr-25"
