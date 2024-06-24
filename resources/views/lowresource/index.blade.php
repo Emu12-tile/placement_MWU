@@ -297,7 +297,7 @@
                                 <?php
                                 $j = 0;
                                 ?>
-                                @foreach ($hrs as $i => $hr)
+                                @foreach ($secondhrs as $i => $hr)
                                     @if ($hr->form->position->position_type_id == 2)
                                         @if ($hr->status_hr == 1)
                                             <tr>
@@ -398,12 +398,12 @@
                                                             <!-- Button trigger modal -->
                                                             <button type="button"
                                                                 class="btn bg-green-dark-4 text-white btn-sm"
-                                                                data-toggle="modal" data-target="#id1_{{ $i }}">
+                                                                data-toggle="modal" data-target="#id1s_{{ $i }}">
                                                                 Submit
                                                             </button>
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="id1_{{ $i }}"
+                                                            <div class="modal fade" id="id1s_{{ $i }}"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalCenter" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered"
@@ -450,11 +450,11 @@
 
                                                     <a href="" type="button"
                                                         class="btn btn-primary requestStat btn-sm" data-toggle="modal"
-                                                        data-target="#id_{{ $i }}"><i
+                                                        data-target="#id2_{{ $i }}"><i
                                                             class="ion ion-md-archive "></i>pdf
                                                     </a>
 
-                                                    <div class="modal fade" id="id_{{ $i }}" tabindex="-1"
+                                                    <div class="modal fade" id="id2_{{ $i }}" tabindex="-1"
                                                         role="dialog" aria-labelledby="exampleModalLongTitle"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
