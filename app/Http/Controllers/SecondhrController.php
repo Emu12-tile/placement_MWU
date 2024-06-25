@@ -245,7 +245,7 @@ class SecondhrController extends Controller
 
             // return redirect('posDetailtwo/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');
         } else if ($request->type == 'second') {
-            return redirect('choiceDetaillow/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');;
+            return redirect('positionDetail/' . $hr->form->choice2_id)->with('status', 'evaluation edited successfully');;
         }
     }
     public function update1(Request $request, $id)

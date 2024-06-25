@@ -24,10 +24,10 @@
                                 <table id="datable_6" class="table table-hover table-bordered w-100  pb-30">
 
                                     <thead>
-                                        {{-- <tr>
-                                            <th></th>
-                                            <th colspan="9"></th>
-                                        </tr> --}}
+                                        <tr>
+                                            {{-- <th></th> --}}
+                                           
+                                        </tr>
                                         <tr>
                                             <th>ተ.ቁ</th>
 
@@ -35,8 +35,8 @@
 
                                             {{-- <th>ውጤት ሰጪ</th> --}}
 
-                                            <th>ለትምህርት ዝግጅት የሚሰጥ ነጥብ</th>
-                                            <th>ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</th>
+                                            <th>ለትምህርት ዝግጅት </th>
+                                            <th>ለስራ ልምድ አገልግሎት </th>
                                             <th>ለውጤት ተኮር ምዘና</th>
 
                                             <th>ለፈተና ውጤት</th>
@@ -46,6 +46,7 @@
                                             {{-- <th>አጠቃላይ ውጤት(100%)</th> --}}
 
                                             <th>አጠቃላይ ውጤት(65%)</th>
+                                            <th>የተወዳደሩበት የሥራ ክፍልና የሥራ መደብ (1ኛ ምርጫ)</th>
                                             <th>Action</th>
 
                                             <th>Submit</th>
@@ -55,6 +56,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{-- <th colspan="11">{{ $hrs->first()->form->job_category->job_category ?? 'Job_category' }}/{{ $hrs->first()->form->position->position ?? 'Position' }}</th> --}}
                                         <?php
                                         $j = 0;
                                         ?>
@@ -81,6 +83,8 @@
                                                             {{ $hr->performance + $hr->experience + $hr->resultbased + $hr->exam }}
 
                                                         </td>
+                                                        <td>{{$hr->form->job_category->job_category}}/{{$hr->form->position->position}}</td>
+                                                    
 
                                                         <td> <a href="{{ route('resource.edit', $hr->id) }}"
                                                                 data-toggle="tooltip" data-original-title="Edit"> <i
@@ -336,17 +340,19 @@
                     <div class="col-sm">
                         <div class="table-wrap">
                             <div class="table-responsive">
-                                <table id="datable_8" class="table table-hover table-bordered w-100 pb-30">
+                                <table id="datable_9" class="table table-hover table-bordered w-100 pb-30">
                                     <thead>
+                                        
                                         <tr>
+
                                             <th>ተ.ቁ</th>
 
                                             <th>ሙሉ ስም</th>
 
                                             {{-- <th>ውጤት ሰጪ</th> --}}
 
-                                            <th>ለትምህርት ዝግጅት የሚሰጥ ነጥብ</th>
-                                            <th>ለስራ ልምድ አገልግሎት የሚሰጥ ነጥብ</th>
+                                            <th>ለትምህርት ዝግጅት </th>
+                                            <th>ለስራ ልምድ አገልግሎት</th>
                                             <th>ለውጤት ተኮር ምዘና</th>
 
                                             <th>ለፈተና ውጤት</th>
@@ -355,6 +361,7 @@
 
 
                                             <th>አጠቃላይ ውጤት(65%)</th>
+                                            <th>የተወዳደሩበት የሥራ ክፍልና የሥራ መደብ (2ኛ ምርጫ)</th>
                                             <th>Action</th>
                                             <th>submit</th>
                                             <th>pdf</th>
@@ -362,6 +369,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <?php
                                         $j = 0;
                                         ?>
@@ -389,6 +397,7 @@
 
 
 
+                                                        <td>{{$hr->form->jobcat2->job_category}}/{{$hr->form->choice2->position}}</td>
 
 
                                                         <td> <a href="{{ route('secondhr.edit', $hr->id) }}"
@@ -407,12 +416,12 @@
                                                                     <button type="button"
                                                                         class="btn bg-green-dark-4 text-white btn-sm"
                                                                         data-toggle="modal"
-                                                                        data-target="#id1_{{ $i }}">
+                                                                        data-target="#id1s_{{ $i }}">
                                                                         Submit
                                                                     </button>
 
                                                                     <!-- Modal -->
-                                                                    <div class="modal fade" id="id1_{{ $i }}"
+                                                                    <div class="modal fade" id="id1s_{{ $i }}"
                                                                         tabindex="-1" role="dialog"
                                                                         aria-labelledby="exampleModalCenter" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered"
@@ -458,11 +467,11 @@
 
 
                                                             <button type="button" class="btn btn-primary requestStat btn-sm "
-                                                                data-toggle="modal" data-target="#id_{{ $i }}"><i
+                                                                data-toggle="modal" data-target="#ids_{{ $i }}"><i
                                                                     class="ion ion-md-archive "></i>pdf
                                                             </button>
 
-                                                            <div class="modal fade" id="id_{{ $i }}" tabindex="-1"
+                                                            <div class="modal fade" id="ids_{{ $i }}" tabindex="-1"
                                                                 role="dialog" aria-labelledby="exampleModalLongTitle"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog modal-lg" role="document">
