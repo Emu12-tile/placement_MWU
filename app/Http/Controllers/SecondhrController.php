@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\choice2;
 use App\Models\Form;
 use App\Models\Secondhr;
+use App\Models\HR;
 use App\Models\Education;
 use App\Models\experience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class SecondhrController extends Controller
 {
@@ -64,7 +67,7 @@ class SecondhrController extends Controller
             ->distinct('choice2s.id')
             ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id']);
 
-
+     
         return view('secondchoicelow.pos', compact('forms'));
     }
     public function choiceDetaillow($id)
@@ -97,8 +100,27 @@ class SecondhrController extends Controller
             ->where('choice2s.position_type_id', 1)
             ->distinct('choice2s.id')
             ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id', 'categories.category']);
+            $hrs = HR::join('forms', 'forms.id', '=', 'h_r_s.form_id')
+            ->join('positions', 'positions.id', '=', 'forms.position_id')
 
-        return view('secondchoice.postwo', compact('forms'));
+            ->select('h_r_s.*','forms.position_id as position_id')
+            ->addSelect(DB::raw("'first_choice' as source"))
+
+
+            ->get();
+            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+            
+
+            ->select('secondhrs.*','forms.choice2_id as position_id')
+            ->addSelect(DB::raw("'second_choice' as source"))
+
+            ->get();
+            
+            $combinedData = $hrs->concat($secondhrs);
+            // dd($combinedData);
+            $groupedData = $combinedData->groupBy('position_id');
+        return view('secondchoice.postwo', compact('groupedData'));
     }
     public function posDetailtwo($id)
     {

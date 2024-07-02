@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Level;
 
 use App\Models\choice2;
+use App\Models\secondhr;
 
 use App\Models\jobcat2;
 use App\Models\EduLevel;
@@ -156,12 +157,35 @@ class FormController extends Controller
     }
     public function pos2()
     {
-        $forms = choice2::join('forms', 'forms.choice2_id', '=', 'choice2s.id')
-            ->join('categories', 'categories.id', '=', 'choice2s.category_id')
-            ->where('categories.catstatus', 'active')
-            ->distinct('choice2s.id')
-            ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id']);
-        return view('secondchoice.pos', compact('forms'));
+        $positions=Position:: join('categories', 'categories.id', '=', 'positions.category_id')
+        ->where('categories.catstatus', 'active')
+        
+        ->where('positions.position_type_id', 1)
+        ->distinct('positions.id')
+        ->get();
+        $hrs = HR::join('forms', 'forms.id', '=', 'h_r_s.form_id')
+            ->join('positions', 'positions.id', '=', 'forms.position_id')
+
+            ->select('h_r_s.*','forms.position_id as position_id')
+            ->addSelect(DB::raw("'first_choice' as source"))
+
+
+            ->get();
+            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+            
+
+            ->select('secondhrs.*','forms.choice2_id as position_id')
+            ->addSelect(DB::raw("'second_choice' as source"))
+
+            ->get();
+            
+            $combinedData = $hrs->concat($secondhrs);
+            // dd($combinedData);
+            $groupedData = $combinedData->groupBy('position_id');
+
+          
+        return view('secondchoice.pos', compact('groupedData','positions'));
     }
 
 

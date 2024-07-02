@@ -1133,7 +1133,7 @@
                                 <table id="datable_7" class="table table-hover table-bordered w-100  pb-30">
                                 @endrole
                                 @role('president')
-                                    <table id="datable_1" class="table table-hover table-bordered w-100  pb-30">
+                                    <table id="datable_8" class="table table-hover table-bordered w-100  pb-30">
                                     @endrole
                                     <thead>
                                         <tr>
@@ -1226,7 +1226,7 @@
                                             <?php
                                             $j = 0;
                                             ?>
-                                            @foreach ($hrs as $i => $hr)
+                                            @foreach ($secondhrs as $i => $hr)
                                                 @if ($hr->form->choice2->position_type_id == 1)
                                                     @if ($hr->status_hr == 1 && $hr->status_president == 0)
                                                         <tr>
@@ -1239,9 +1239,9 @@
                                                                     </a>
                                                                 </form> --}}
                                                                 <button type="button" class="btn btn-primary "
-                                                                    data-toggle="modal" data-target="#id_{{ $i }}">
+                                                                    data-toggle="modal" data-target="#idp_{{ $i }}">
                                                                     {{ $hr->form->full_name }}</button>
-                                                                <div class="modal fade" id="id_{{ $i }}"
+                                                                <div class="modal fade" id="idp_{{ $i }}"
                                                                     tabindex="-1" role="dialog"
                                                                     aria-labelledby="exampleModalLongTitle"
                                                                     aria-hidden="true">
