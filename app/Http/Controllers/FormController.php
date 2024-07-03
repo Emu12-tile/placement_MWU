@@ -171,7 +171,7 @@ class FormController extends Controller
 
 
             ->get();
-            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            $secondhrs = secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
             ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
             
 
