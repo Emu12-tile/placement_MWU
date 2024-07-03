@@ -9,7 +9,7 @@ use App\Models\Admin;
 use App\Models\Level;
 
 use App\Models\choice2;
-use App\Models\secondhr;
+use App\Models\Secondhr;
 
 use App\Models\jobcat2;
 use App\Models\EduLevel;
@@ -171,7 +171,7 @@ class FormController extends Controller
 
 
             ->get();
-            $secondhrs = secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
             ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
             
 
