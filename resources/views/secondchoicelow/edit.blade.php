@@ -359,7 +359,7 @@
                                                         <td>{{ $hr->form->servicPeriodAtAnotherPlace }}</td>
                                                         <td>{{ $hr->form->serviceBeforeDiplo }}</td>
                                                         <td>{{ $hr->form->serviceAfterDiplo }}</td>
-                                                        <td>{{ $hr->form->DisciplineFlaw }},{{$form->DisciplineFlawDate}}</td>
+                                                        <td>{{ $hr->form->DisciplineFlaw }},{{$hr->form->DisciplineFlawDate}}</td>
                                                         <td> {{$hr->form->employer_support}}
                                                          </td>
                                                         <td>{{ $hr->form->employee_situation }}</td>
