@@ -881,19 +881,19 @@
                 }
                 else if(years_diff < 5)
                 {
-                    experience_point = 7.5;
+                    experience_point = 15;
                 }
                 else if(years_diff < 7)
                 {
-                    experience_point = 10;
+                    experience_point = 20;
                 }
                 else if(years_diff < 10)
                 {
-                    experience_point = 12.5;
+                    experience_point = 25;
                 }
                 else //>=10
                 {
-                    experience_point = 15;
+                    experience_point = 30;
                 }
 
                 $("#experience").val(experience_point);
