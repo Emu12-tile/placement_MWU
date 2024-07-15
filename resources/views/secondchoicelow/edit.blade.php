@@ -470,27 +470,79 @@
 
                                                                         <select
                                                                             class="form-control custom-select select  mt-15">
-                                                                            <option selected>Select</option>
-                                                                            <option value="0">0</option>
+                                                                            <option >Select</option>
+                                                                            <option value="0" selected>0</option>
                                                                             <option value="0.5">1/2</option>
                                                                             <option value="1">1</option>
                                                                         </select>
 
                                                                     </div>
                                                                 </td>
-                                                                <td id="add">
+                                                                <td id="add">0-0-0
 
                                                                 </td>
 
                                                             </tr>
                                                         @endforeach
+
+
+
+                                                        <tr data-id="{{ $fo->id + 1}}">
+                                                            <td>From<input type="text" name="from" id="from" placeholder="yyyy-mm-dd"> <br>To &nbsp; &nbsp;&nbsp;&nbsp;<input type="text" name="to" id="to" placeholder="yyyy-mm-dd"></td>
+
+                                                            <td>
+                                                                <div class="col-md-10">
+
+                                                                    <select
+                                                                        class="form-control custom-select newselects select mt-15 selection">
+                                                                        <option >Select</option>
+                                                                        <option value="0" selected>0</option>
+                                                                        <option value="0.5">1/2</option>
+                                                                        <option value="1">1</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </td>
+                                                            <td id="add">0-0-0</td>
+                                                        </tr>
+
+
+                                                        <tr data-id="{{ $fo->id + 2}}">
+                                                            <td>
+
+                                                               From <input type="text" value="" name="from2" id="from2" placeholder="yyyy-mm-dd"> <br>
+                                                               To &nbsp; &nbsp;&nbsp;&nbsp;<input type="text" value="" name="to2" id="to2" placeholder="yyyy-mm-dd">
+
+
+                                                            </td>
+
+                                                            <td>
+                                                                <div class="col-md-10">
+
+                                                                    <select
+                                                                        class="form-control select newselects custom-select   mt-15 selection2">
+                                                                        <option >Select</option>
+                                                                        <option value="0" selected>0</option>
+                                                                        <option value="0.5">1/2</option>
+                                                                        <option value="1">1</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </td>
+                                                            <td id="add">0-0-0</td>
+                                                        </tr>
+
+
+
                                                         <tr>
                                                             <td colspan="2" class="text-center">ድምር</td>
                                                             {{-- <td></td> --}}
-                                                            <td id="total-year"></td>
-                                                            <td>- {{ preg_replace('/[^0-9]/', '', $hr->form->choice2->experience) }}</td>
+                                                            <td id="total-year">0-0-0</td>
+                                                            <td id="yrs">- {{ preg_replace('/[^0-9]/', '', $hr->form->choice2->experience) }}</td>
 
                                                         </tr>
+
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -526,36 +578,80 @@
         </div>
     </div>
 @endsection
+
+
 @section('javascript')
-    {{-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> --}}
     <script>
         $(document).ready(function() {
             var totalYear = 0;
             var totalMonth = 0;
             var totalDay = 0;
 
+      
+
+        // Get the current date
+        var currentDate = new Date().toISOString().substr(0, 10);
+
+        // Set the value of the input field
+        document.getElementById("from").value = currentDate;
+        document.getElementById("to").value = currentDate;
+        document.getElementById("from2").value = currentDate;
+        document.getElementById("to2").value = currentDate;
+
+      
+        
+
             $('.select').on('change', function() {
                 // Reset the totals when a new value is selected
                 totalYear = 0;
                 totalMonth = 0;
                 totalDay = 0;
-
+                var selected_right_column = '';
+                var counter = 0;
+               
                 // Iterate over each select element and calculate the sum
                 $('.select').each(function() {
                     var selectedValue = parseFloat($(this).val());
 
-                    var data = $(this).closest('tr').data('id');
-                    var myData = {!! json_encode($forms) !!};
+                    var data = null;
+                    var myData = null;
+                    var row = null;
+                    var startdate = null;
+                    var enddate = null;
 
-                    var row = myData.find(function(obj) {
+                    if($(this).hasClass('newselects'))
+                    {
+                         
+                        if($(this).hasClass('selection'))
+                        {
+                            startdate = new Date($("#from").val());
+                            enddate = new Date($("#to").val());
+                        }
+                       
+                        else if($(this).hasClass('selection2'))
+                        {
+                            startdate = new Date($("#from2").val());
+                            enddate = new Date($("#to2").val());
+                        }
+
+                    }
+                    else 
+                    {
+                        // console.log("NO")
+                     data = $(this).closest('tr').data('id');
+                     myData = {!! json_encode($forms) !!};
+                     row = myData.find(function(obj) {
                         return obj.id === data;
                     });
+                     startdate = new Date(row.startingDate);
+                     enddate = new Date(row.endingDate);
 
-                    var startdate = new Date(row.startingDate);
-                    var enddate = new Date(row.endingDate);
-                    // var date = new Date(row.startingDate);
-                    // console.log(startdate);
-                    // var unix = Math.floor(date.getTime() / 1000);
+                    //  console.log(startdate);
+
+                    }
+
+                    
+                 
                     const years = startdate.getFullYear();
                     const months = startdate.getMonth() + 1;
                     const days = startdate.getDate();
@@ -589,7 +685,7 @@
                     if (selectedValue == 0.5) {
                         if (yearDifferenceb % 2 != 0) {
                             yearDifference = parseInt(yearDifference);
-                            console.log(yearDifference);
+                            // console.log(yearDifference);
                             // monthDifference+=6
                             monthDifference = 6 + (monthDifference);
                             //    console.log(monthDifference);
@@ -619,14 +715,6 @@
 
 
                     }
-                    console.log(yearDifference);
-                    console.log(monthDifference);
-                    console.log(dayDifference);
-
-
-
-
-
 
                     if (dayDifference < 0) {
                         dayDifference += 30;
@@ -637,30 +725,232 @@
                         monthDifference += 12;
                         yearDifference -= 1;
                     }
-                    // console.log(dayDifference);
-                    // console.log(monthDifference);
-                    // console.log(yearDifference);
+                    
                     var all = yearDifference + '-' + monthDifference + '-' + dayDifference;
 
 
+                    totalYear += yearDifference;
+                    totalMonth += monthDifference;
+                    totalDay += dayDifference;
+
+                    if (totalDay > 30) {
+                        totalMonth = totalMonth + 1;
+                        totalDay = totalDay - 30;
+                    }
+                    if (totalMonth > 12) {
+                        totalYear = totalYear + 1;
+                        totalMonth = totalMonth - 12;
+                    }
+                    counter ++;
+                    $(this).closest('tr').find('#add').text(all);
+
+                    var firstColumnData = $(this).closest('tr').find('td:first-child').text().trim();
+                    if (firstColumnData.startsWith("From")) {
+                        
+                        let from = $("#from").val();
+                        let to = $("#to").val();
+                        let from2 = $("#from2").val();
+                        let to2 = $("#to2").val();
+                        var from_to = from + ' to ' + to;
+                        var from_to2 = from2 + ' to ' + to2;
+
+                        if($(this).hasClass('selection'))
+                        {
+                            selected_right_column += counter+'. '+' ('+ from_to.trim() + ') '+ all+'\n';
+                        }
+
+                        else 
+                        {
+                            selected_right_column += counter+'. '+' ('+ from_to2.trim() + ') '+ all+'\n';
+                        }
+                       
+
+                    }
+                    else 
+                    {
+                        selected_right_column += counter+'. '+' '+ firstColumnData.trim() + ' '+ all+'\n';
+
+                    }
+
+                   
+
+
+                });
+
+                totalYear = totalYear;
+                totalMonth = totalMonth;
+                totalDay = totalDay;
+
+               var total = totalYear + '-' + totalMonth + '-' + totalDay;
+                $('#total-year').text(total);
+               
+                
+                selected_right_column += 'Sum: '+total+'\n';
+                $('#remark').val(selected_right_column);
+               
+                let yrs = $("#yrs").text();
+                let y = yrs.slice(1);
+                let years = parseInt(y);
+                let years_diff = totalYear - years;
+                let experience_point = 0;
+
+                if(years_diff <= 0)
+                {
+                    experience_point = 0;
+                }
+                else if(years_diff < 5)
+                {
+                    experience_point = 7.5;
+                }
+                else if(years_diff < 7)
+                {
+                    experience_point = 10;
+                }
+                else if(years_diff < 10)
+                {
+                    experience_point = 12.5;
+                }
+                else //>=10
+                {
+                    experience_point = 15;
+                }
+
+                $("#experience").val(experience_point);
+
+                console.log(selected_right_column); 
+            });
+
+
+        });
 
 
 
 
+$(window).load(function() {
+    
+
+            var totalYear = 0;
+            var totalMonth = 0;
+            var totalDay = 0;
+
+      
+
+        // Get the current date
+        var currentDate = new Date().toISOString().substr(0, 10);
+
+        // Set the value of the input field
+        document.getElementById("from").value = currentDate;
+        document.getElementById("to").value = currentDate;
+        document.getElementById("from2").value = currentDate;
+        document.getElementById("to2").value = currentDate;
 
 
-                    // var evaluate = enddate - startdate;
+                // Iterate over each select element and calculate the sum
+                $('.select').each(function() {
+                    var selectedValue = parseFloat($(this).val());
 
-                    // var diffInDays = Math.floor(evaluate / (1000 * 60 * 60 * 24));
-                    // var multiply = diffInDays * selectedValue;
+                    var data = null;
+                    var myData = null;
+                    var row = null;
+                    var startdate = null;
+                    var enddate = null;
 
-                    // var year = parseInt(multiply / 365)
-                    // var diff = multiply % 365;
+                    if($(this).hasClass('newselects'))
+                    {
+                        // console.log("yes")
+                         startdate = new Date($("#from2").val());
+                         enddate = new Date($("#to2").val());
+                    }
+                    else 
+                    {
+                        // console.log("NO")
+                     data = $(this).closest('tr').data('id');
+                     myData = {!! json_encode($forms) !!};
+                     row = myData.find(function(obj) {
+                        return obj.id === data;
+                    });
+                     startdate = new Date(row.startingDate);
+                     enddate = new Date(row.endingDate);
+                    }
 
-                    // var month = parseInt(diff / 30)
-                    // var diffday = parseInt(diff - (month * 30))
+                    
+                 
+                    const years = startdate.getFullYear();
+                    const months = startdate.getMonth() + 1;
+                    const days = startdate.getDate();
+                    const years2 = enddate.getFullYear();
+                    const months2 = enddate.getMonth() + 1;
+                    const days2 = enddate.getDate();
+                    let dayDifferenceb = (days2 - days);
+                    let monthDifferenceb = (months2 - months);
+                    let yearDifferenceb = (years2 - years);
+                    if (dayDifferenceb < 0) {
+                        dayDifferenceb += 30;
+                        monthDifferenceb -= 1;
 
-                    // var all = year + '-' + month + '-' + diffday;
+                    } else {
+                        dayDifferenceb = (days2 - days);
+                        monthDifferenceb = monthDifferenceb;
+
+                    }
+                    if (monthDifferenceb < 0) {
+                        monthDifferenceb += 12;
+                        yearDifferenceb -= 1;
+                    } else {
+                        monthDifferenceb = (months2 - months);
+                        yearDifferenceb = yearDifferenceb;
+                    }
+
+                    let dayDifference = dayDifferenceb * selectedValue;
+                    let monthDifference = monthDifferenceb * selectedValue;
+                    let yearDifference = yearDifferenceb * selectedValue;
+
+                    if (selectedValue == 0.5) {
+                        if (yearDifferenceb % 2 != 0) {
+                            yearDifference = parseInt(yearDifference);
+                            // console.log(yearDifference);
+                            // monthDifference+=6
+                            monthDifference = 6 + (monthDifference);
+                            //    console.log(monthDifference);
+                            if (monthDifference >= 12) {
+                                monthDifference = 0;
+                                yearDifference = yearDifference + 1
+
+                            }
+
+
+                        } else {
+                            yearDifference = parseInt(yearDifference);
+                            monthDifference = monthDifference;
+
+                        }
+                        if (monthDifferenceb % 2 != 0) {
+                            monthDifference = parseInt(monthDifference)
+                            dayDifference = dayDifference + 15
+
+                        } else {
+                            monthDifference = parseInt(monthDifference)
+                            dayDifference = dayDifference
+                        }
+                        if (dayDifferenceb % 2 != 0) {
+                            dayDifference = parseInt(dayDifference);
+                        }
+
+
+                    }
+
+                    if (dayDifference < 0) {
+                        dayDifference += 30;
+                        monthDifference -= 1;
+                    }
+
+                    if (monthDifference < 0) {
+                        monthDifference += 12;
+                        yearDifference -= 1;
+                    }
+                    
+                    var all = yearDifference + '-' + monthDifference + '-' + dayDifference;
+
 
                     totalYear += yearDifference;
                     totalMonth += monthDifference;
@@ -675,13 +965,23 @@
                         totalMonth = totalMonth - 12;
                     }
 
-
                     $(this).closest('tr').find('#add').text(all);
                 });
 
-                var total = totalYear + '-' + totalMonth + '-' + totalDay;
+                totalYear = totalYear;
+                totalMonth = totalMonth;
+                totalDay = totalDay;
+
+               var total = totalYear + '-' + totalMonth + '-' + totalDay;
                 $('#total-year').text(total);
-            });
-        });
+                $('#remark').val(total);
+                
+             
+
+
+  });
+
+
     </script>
 @endsection
+
