@@ -22,7 +22,7 @@
                     <div class="col-sm">
                         <div class="table-wrap">
 
-                            <table id="datable_3" class="table table-hover table-bordered w-100 pb-30">
+                            <table id="datable_1" class="table table-hover table-bordered w-100 pb-30">
                                 <thead>
                                    
                                     <tr>
@@ -46,7 +46,7 @@
                                     @foreach($groupedData as $position_id => $group)
                                     
                                         @foreach($group as $data)
-                                        @if($data->form->position->position_type_id==2)
+                                        {{-- @if($data->form->position->position_type_id==2) --}}
                                             <tr>
                                                 <td>{{ $count++ }}</td>
                                                 <td>{{ $data->form->full_name }}</td>
@@ -115,7 +115,7 @@
                                                 </td>
 
                                             </tr>
-                                            @endif
+                                            {{-- @endif --}}
                                         @endforeach
                                     @endforeach
                                 </tbody>

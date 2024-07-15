@@ -168,8 +168,7 @@ class FormController extends Controller
 
             ->select('h_r_s.*','forms.position_id as position_id')
             ->addSelect(DB::raw("'first_choice' as source"))
-
-
+            ->where('positions.position_type_id', 1)
             ->get();
             $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
             ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
@@ -177,6 +176,7 @@ class FormController extends Controller
 
             ->select('secondhrs.*','forms.choice2_id as position_id')
             ->addSelect(DB::raw("'second_choice' as source"))
+            ->where('choice2s.position_type_id', 1)
 
             ->get();
             

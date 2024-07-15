@@ -102,9 +102,11 @@ class SecondhrController extends Controller
             ->get(['choice2s.id', 'choice2s.position', 'choice2s.jobcat2_id', 'categories.category']);
             $hrs = HR::join('forms', 'forms.id', '=', 'h_r_s.form_id')
             ->join('positions', 'positions.id', '=', 'forms.position_id')
+            
 
             ->select('h_r_s.*','forms.position_id as position_id')
             ->addSelect(DB::raw("'first_choice' as source"))
+            ->where('positions.position_type_id', 2)
 
 
             ->get();
@@ -114,6 +116,7 @@ class SecondhrController extends Controller
 
             ->select('secondhrs.*','forms.choice2_id as position_id')
             ->addSelect(DB::raw("'second_choice' as source"))
+            ->where('choice2s.position_type_id', 2)
 
             ->get();
             
