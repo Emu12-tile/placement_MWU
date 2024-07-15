@@ -46,7 +46,7 @@
                                         @foreach($groupedData as $position_id => $group)
                                         
                                             @foreach($group as $data)
-                                            @if($data->form->position->position_type_id==1)
+                                            {{-- @if($data->form->position->position_type_id==1 ) --}}
                                                 <tr>
                                                     <td>{{ $count++ }}</td>
                                                     <td>{{ $data->form->full_name }}</td>
@@ -115,7 +115,7 @@
                                                     </td>
 
                                                 </tr>
-                                                @endif
+                                                {{-- @endif --}}
                                             @endforeach
                                         @endforeach
                                     </tbody>
