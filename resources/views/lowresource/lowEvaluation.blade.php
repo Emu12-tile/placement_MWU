@@ -866,8 +866,7 @@
                 let years = parseInt(y);
                 let years_diff = totalYear - years;
                 let experience_point = 0;
-
-                   if(years_diff <= 0)
+                if(years_diff <= 0)
                 {
                     experience_point = 0;
                 }
