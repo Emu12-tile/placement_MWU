@@ -27,7 +27,7 @@
                                             <tr>
                                                 <th>ተ.ቁ</th>
                                                 <th>የመመዘኛ መስፈርቶች</th>
-                                                @role('hr')
+                                                @role('hr|hr2')
                                                     <th>የ ማወዳደርያ ነጥብ(100%)</th>
                                                 @endrole
 
@@ -36,7 +36,7 @@
 
                                         <tbody>
 
-                                            @role('hr')
+                                            @role('hr|hr2')
                                                 <tr>
                                                     <th scope="row">1</th>
                                                     <td> ለትምህርት ዝግጅት የሚሰጥ ነጥብ</td>
@@ -255,9 +255,6 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    {{-- <div class="col-md-6"> --}}
-
-
                                     <div class="col-sm">
                                         <div class="table-wrap">
                                             <div class="table-responsive">
@@ -266,7 +263,7 @@
                                                         <tr>
                                                             <th rowspan="2">ሙሉ ስም</th>
                                                             <th rowspan="2">ጾታ</th>
-                                                            <th rowspan="2">የሚወዳደሩበት የስራ መደብ</th>
+                                                            <th rowspan="2">የሚወዳደሩበት የስራ ክፍል / የስራ መደብ</th>
                                                             <th colspan="4">አሁን ያሉበት የትምህርት ደረጃና የትምህርት ዝግጅት</th>
                                                             <th rowspan="2">የሁለት ተከታታይ የስራ አፈጻጸም አማካይ ውጤት</th>
                                                             <th rowspan="2">ተጨማሪ ይመልከቱ</th>
@@ -282,8 +279,8 @@
                                                         <tr>
                                                             <td rowspan="{{ count($edu) + 1 }}">{{ $hr->form->full_name }}</td>
                                                             <td rowspan="{{ count($edu) + 1 }}">{{ $hr->form->sex }}</td>
-                                                            <td rowspan="{{ count($edu) + 1 }}">
-                                                                {{  $hr->form->position->position }}</td>
+                                                            <td rowspan="{{ count($edu) + 1 }}">{{$hr->form->job_category->job_category}}/
+                                                                {{ $hr->form->position->position }}</td>
                                                             @foreach ($edu as $index => $type)
                                                                 @if ($index === 0)
                                                                     <td>{{ $type->level }}</td>
@@ -316,7 +313,7 @@
                                 </div>
                                 <div class="collapse" id="more">
                                     <div class="card card-body">
-                
+
                                         <div class="table-wrap mb-20 ">
                                             <div class="table-responsive">
                                                 <table class="table table-active table-bordered mb-0">
@@ -324,46 +321,37 @@
                                                         <tr>
                                                             {{-- <th> የስራ ልምድዎ </th> --}}
                                                             <th>አሁን ያሉበት የስራ ክፍል</th>
-                
+
                                                             <th>አሁን ያሉበት የስራ መደብ</th>
                                                             <th>ብሔር</th>
                                                             <th>የትውልድ ዘመን</th>
                                                             <th>በዩኒቨርስቲዉ የቅጥር ዘመን
                                                                 በኢትዮጵያ</th>
-                                                            <th>ቅላላ አገልግሎት ዘመን(በዓመት)</th>
-                                                           
-                                                            <th>አገልግሎት ከዲፕሎማ
-                                                                በፊት(በዓመት,የስራ መደብ)</th>
-                                                            <th>አገልግሎት ከዲፕሎማ/ዲግሪ
-                                                                በኋላ(በዓመት, የስራ መደብ)</th>
-                                                            <th>የዲስፕሊን ጉድለት</th>
-                                                            <th>የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</th>
+                                                            <th>የፋይል ጥራት</th>
                                                             <th>ሰራተኛው ያለበት ሁኔታ </th>
-                                                            <th>ተጨማሪ የሥራ ድርሻ</th>
-                
+                                                            <th>ተጨማሪ የስራ ድርሻ</th>
+                                                            <th>የሰራተኛው አዎንታዊ ድጋፍ ተጠቃሚነት</th>
+                                                            
+
                                                         </tr>
                                                     </thead>
-                
+
                                                     <tbody>
                                                         <tr>
-                                                          
+                                                           
                                                             <td>{{ $hr->form->jobcat }}</td>
                                                             <td>{{ $hr->form->positionofnow }}</td>
                                                             <td>{{ $hr->form->ethinicity }}</td>
                                                             <td>{{ $hr->form->birth_date }}</td>
                                                             <td>{{ $hr->form->UniversityHiringEra }}</td>
-                                                            <td>{{ $hr->form->servicPeriodAtUniversity }}</td>
-                                                            {{-- <td>{{ $hr->form->servicPeriodAtAnotherPlace }}</td> --}}
-                                                            <td>{{ $hr->form->serviceBeforeDiplo }}</td>
-                                                            <td>{{ $hr->form->serviceAfterDiplo }}</td>
-                                                            <td>{{ $hr->form->DisciplineFlaw }}.{{$hr->form->DisciplineFlawDate}}</td>
-                                                            <td> {{$hr->form->employer_support }}
-                                                                
-                                                             </td>
+                                                            <td>{{ $hr->form->DisciplineFlaw }}</td>
                                                             <td>{{ $hr->form->employee_situation }}</td>
+                                                            <td>{{ $hr->form->MoreRoles }}</td>
+                                                            <td>{{ $hr->form->remark }}</td>
+                                                            
                                                         </tr>
                                                     </tbody>
-                
+
                                                 </table>
                                             </div>
                                         </div>
@@ -371,7 +359,7 @@
                                 </div>
                                 <div class="row">
 
-                                    @role('hr')
+                                    @role('hr|hr2')
                                         <div class="col-md-4">
                                             <div class="row form-group">
                                                 <label for="performance">ለትምህርት ዝግጅት የሚሰጥ ነጥብ</label>
@@ -400,7 +388,7 @@
                                             <div class="row form-group">
                                                 <label for="resultbased">ለውጤት ተኮር ምዘና </label>
                                                 <input type="float"
-                                                    value="{{ round($hr->form->resultOfrecentPerform * 0.3, 2) }}"
+                                                    value="{{ round($hr->form->resultOfrecentPerform * 0.3, 3) }}"
                                                     class="form-control @error('resultbased') is-invalid @enderror"
                                                     id="resultbased" placeholder="ለውጤት ተኮር ምዘና " name="resultbased"
                                                     min="0" max="30">
@@ -478,9 +466,7 @@
 
                                                                         </div>
                                                                     </td>
-                                                                    <td id="add">0-0-0</td>
-
-                                                                </tr>
+                                                                    <td id="add">0-0-0</tr>
                                                             @endforeach
 
                                                             <tr data-id="{{ $fo->id + 1}}">
@@ -533,6 +519,9 @@
                                                                 </td>
                                                                 <td id="add">0-0-0</td>
                                                             </tr>
+
+
+
                                                             <tr>
                                                                 <td colspan="2" class="text-center">ድምር</td>
                                                                 {{-- <td></td> --}}
@@ -540,7 +529,6 @@
                                                                 <td id="yrs">- {{ preg_replace('/[^0-9]/', '', $hr->form->position->experience) }}</td>
 
                                                             </tr>
-
                                                         </tbody>
                                                     </table>
                                                 </div>
