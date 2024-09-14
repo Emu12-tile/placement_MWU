@@ -96,9 +96,9 @@
                                                          @endif
                                                     </td>
                                                     <td> @if($data->source == 'first_choice')
-                                                        {{$data->performance+$data->experience+$data->resultbased}}
+                                                        {{$data->performance+$data->experience+$data->resultbased + $data->exam}}
                                                         @elseif($data->source == 'second_choice')
-                                                        {{$data->performance+$data->experience+$data->resultbased}} 
+                                                        {{$data->performance+$data->experience+$data->resultbased + $data->exam}} 
                                                          @endif
                                                     </td>
                                                     <td> @if($data->source == 'first_choice')
