@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Models\Secondhr;
 use App\Models\Education;
 use App\Models\President;
+use App\Models\Prestwo;
 use App\Models\experience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +45,7 @@ class PresidentialController extends Controller
     public function pos()
     {
 
-        
+
         $forms = Position::join('forms', 'forms.position_id', '=', 'positions.id')
                ->join('h_r_s','h_r_s.form_id','=','forms.id')
                ->join('secondhrs','secondhrs.form_id','forms.id')
@@ -65,17 +66,25 @@ class PresidentialController extends Controller
         $pos_id = (int) $id;
 
         $pres = President::join('h_r_s', 'h_r_s.id', '=', 'presidents.h_r__id')
-            ->join('forms', 'forms.id', '=', 'h_r_s.form_id')
-            ->join('positions', 'positions.id', '=', 'forms.position_id')
+        ->join('forms', 'forms.id', '=', 'h_r_s.form_id')
+        ->join('positions', 'positions.id', '=', 'forms.position_id')
 
-            // ->where('status', 1)
-            ->where('positions.id', $pos_id)
+        // ->where('status', 1)
+        ->where('positions.id', $pos_id)
             ->select('presidents.*')
+            ->get();
+        $prestwo = Prestwo::join('secondhrs', 'secondhrs.id', '=', 'prestwos.secondhr_id')
+        ->join('forms', 'forms.id', '=', 'secondhrs.form_id')
+        ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+
+        // ->where('status', 1)
+        ->where('choice2s.id', $pos_id)
+            ->select('prestwos.*')
             ->get();
 
 
 
-        return view('presidential.presresult', compact('pres'));
+        return view('presidential.presresult', compact('pres', 'prestwo'));
     }
     public function createpresident($prod_id)
     {

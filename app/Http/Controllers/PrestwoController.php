@@ -97,7 +97,7 @@ class PrestwoController extends Controller
 
 
 
-        return redirect('posDetailtwo/' . $resource->secondhr->form->choice2_id)->with('status', 'evaluation added successfully');
+        return redirect('positionDetailhigh/' . $resource->secondhr->form->choice2_id)->with('status', 'evaluation added successfully');
     }
     public function edit($id)
     {
@@ -126,7 +126,7 @@ class PrestwoController extends Controller
 
         $hr->update();
 
-        return redirect('result2/' . $hr->secondhr->form->choice2_id)->with('status', ' updated successfully');
+        return redirect('posDetailpres/' . $hr->secondhr->form->choice2_id)->with('status', ' updated successfully');
     }
     public function update1(Request $request, $id)
     {

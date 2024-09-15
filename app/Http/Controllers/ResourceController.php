@@ -36,10 +36,10 @@ class ResourceController extends Controller
     public function poshigh()
     {
         $forms = Position::
-            
+
             join('categories', 'categories.id', '=', 'positions.category_id')
             ->where('categories.catstatus', 'active')
-            
+
             ->where('positions.position_type_id', 1)
             ->distinct('positions.id')
 
@@ -51,43 +51,31 @@ class ResourceController extends Controller
 
 
         $pos_id = (int) $id;
-        $forms = Position::
-            
-            join('categories', 'categories.id', '=', 'positions.category_id')
-            ->where('categories.catstatus', 'active')
-            
-            ->where('positions.position_type_id', 1)
-            ->distinct('positions.id')
-
-            ->get(['positions.id', 'positions.position', 'positions.job_category_id', 'categories.category','positions.position_type_id']);
 
         $hrs = HR::join('forms', 'forms.id', '=', 'h_r_s.form_id')
-            ->join('positions', 'positions.id', '=', 'forms.position_id')
+        ->join('positions', 'positions.id', '=', 'forms.position_id')
 
-            // ->where('status_hr', 1)
-            ->where('positions.id', $pos_id)
+        // ->where('status_hr', 1)
+        ->where('positions.id', $pos_id)
             ->select('h_r_s.*')
             ->get();
-            
-            $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
-            ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+        $secondhrs = Secondhr::join('forms', 'forms.id', '=', 'secondhrs.form_id')
+        ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
 
-            // ->where('status_hr', 1)
-            ->where('choice2s.id', $pos_id)
+        // ->where('status_hr', 1)
+        ->where('choice2s.id', $pos_id)
             ->select('secondhrs.*')
             ->get();
 
 
 
-
-
-        return view('resource.result', compact('hrs','secondhrs','forms'));
+        return view('resource.result', compact('hrs', 'secondhrs'));
     }
 
 
     public function poslow()
     {
-    
+
 
          $form=Form::join('positions','positions.id','forms.position_id')
                    ->join('choice2s','choice2s.id','forms.choice2_id')
@@ -97,7 +85,7 @@ class ResourceController extends Controller
                    ->distinct('positions.id')
                    ->get();
                 //    dd($form);
-                   
+
 
 
 
@@ -113,8 +101,8 @@ class ResourceController extends Controller
             ->distinct('positions.id')
             // ->get();
             ->get(['positions.id', 'positions.position', 'positions.job_category_id','position_type_id']);
-       
-                 
+
+
 
              return view('lowresource.pos', compact('forms'));
     }

@@ -27,17 +27,44 @@ class AdminController extends Controller
     }
     public function posall()
     {
-        $forms = Position::join('categories', 'categories.id', '=', 'positions.category_id')
-            ->where('categories.catstatus', 'active')
-            ->where('positions.position_type_id', 1)
-            ->distinct('positions.id')
-            ->get(['positions.id', 'positions.position', 'positions.job_category_id', 'categories.category']);
-        // dd($forms);
-        return view('homepage.allresult', compact('forms'));
+        // Fetch positions with category status 'active' and position_type_id of 1
+        $positions = Position::join('categories', 'categories.id', '=', 'positions.category_id')
+        ->where('categories.catstatus', 'active')
+        ->where('positions.position_type_id', 1)
+        ->distinct() // Ensures distinct rows based on all columns
+            ->get();
+
+        // Fetch 'hrs' data with proper column aliasing and source labeling
+        $hrs = President::join('h_r_s', 'h_r_s.id', '=', 'presidents.h_r__id')
+        ->join('forms', 'forms.id', '=', 'h_r_s.form_id')
+        ->join('positions', 'positions.id', '=', 'forms.position_id')
+        ->select('presidents.*', 'h_r_s.form_id', 'forms.position_id as position_id') // Ensure correct aliasing
+        ->addSelect(DB::raw("'first_choice' as source"))
+        ->where('positions.position_type_id', 1)
+        ->get();
+
+        // Fetch 'secondhrs' data with proper column aliasing and source labeling
+        $secondhrs = Prestwo::join('secondhrs', 'secondhrs.id', '=', 'prestwos.secondhr_id')
+        ->join('forms', 'forms.id', '=', 'secondhrs.form_id')
+        ->join('choice2s', 'choice2s.id', '=', 'forms.choice2_id')
+        ->select('prestwos.*', 'secondhrs.form_id', 'choice2s.id as position_id') // Ensure correct aliasing
+        ->addSelect(DB::raw("'second_choice' as source"))
+        ->where('choice2s.position_type_id', 1)
+        ->get();
+
+
+        // Combine both collections
+        $combinedData = $hrs->concat($secondhrs);
+
+        // Group by 'position_id'
+        $groupedData = $combinedData->groupBy('position_id');
+        // dd($groupedData);
+        // Pass data to the view
+        return view('homepage.allresult', compact('groupedData', 'positions'));
     }
     public function posall2()
     {
-      
+
         $form3 = Form::join('positions', 'positions.id', '=', 'forms.position_id')
             ->join('choice2s', 'choice2s.id', 'forms.choice2_id')
             ->where('choice2s.position_type_id', 1)

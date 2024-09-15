@@ -201,7 +201,7 @@ Route::middleware([
         Route::get('/posall', [AdminController::class, 'posall'])->name('posall');
         Route::get('/detailall/{id}', [AdminController::class, 'detailall'])->name('detailall');
         Route::get('/posDetail2/{id}', [FormController::class, 'posDetail2'])->name('posDetail2');
-        Route::get('/positionhigh', [ResourceController::class, 'poshigh']);
+        Route::get('/positionhigh', [ResourceController::class, 'poshigh'])->name('positionhigh');
         Route::get('/positionDetailhigh/{id}', [ResourceController::class, 'posDetailhigh'])->name('posDetailhigh');
 
 
